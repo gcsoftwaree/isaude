@@ -26,5 +26,8 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
 
     Route::get('contato', 'ContactController@index')->name('site.contact');
     Route::post('contato', 'ContactController@form')->name('site.contact.form');
+
+    Route::get('cadastro', 'RegisterController@index')->name('site.register');
+    Route::post('cadastro', 'RegisterController@form')->name('site.register.form');
 });
 
