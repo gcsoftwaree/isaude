@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterFormRequest;
+use App\Models\Register;
+use App\Notifications\NewUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class RegisterController extends Controller
 {
@@ -14,11 +18,17 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('site.register.index');
+        return view ('site.register.index');
     }
 
-    public function form(Request $request){
-        ddd($request->all());
+    public function form(RegisterFormRequest $request){
+        $register = Register::create($request->all());
+        Notification::route('mail', config('mail.from.address'))
+            ->notify(new NewUser($register));
+
+             toastr()->success('Uma confirmação foi enviada ao seu email.', 'Cadastro Realizado');
+
+             return redirect()->route('site.home');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,8 +10,8 @@ class Register extends Model
 {
     use HasFactory;
     protected $table = 'tb_glb_pessoa';
+    protected $primaryKey = 'COD_PESSOA';
     protected $fillable = [
-   'COD_PESSOA',
    'TP_PESSOA',
    'COD_TIPO_GENERO',
    'COD_ESTADO_CIVIL',
@@ -24,4 +25,5 @@ class Register extends Model
    'DT_NASCIMENTO',
    'DT_CADASTRO'
     ];
+    public $timestamps = false;
 }

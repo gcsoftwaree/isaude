@@ -67,7 +67,7 @@
             </div>
 
             <article class="card__post">
-                <a href="javascript:;">
+                <a href="javascript:">
                     <div class="post__cover">
                         <img src="{{asset('images/safar-safarov-MSN8TFhJ0is-unsplash.jpg')}}">
                     </div>
