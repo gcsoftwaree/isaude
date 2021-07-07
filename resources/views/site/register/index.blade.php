@@ -3,11 +3,9 @@
 @section('content')
     <div class="gray-background">
         <section class="contact__block contact-wrapper">
-            <h1 class="display-medium">Cur gemna ire? </h1>
-            <p>Hercle, abnoba dexter!, racana! Hippotoxota noceres, tanquam gratis luna. Lotus, noster lactas rare
-                captis de fortis, audax omnia.</p>
+            <h1 class="display-medium">Um sistema de controle e integração de saúde </h1>
+            <p>Fácil acesso e ambiente controlado.</p>
             <section class="contact__options">
-
                 <form class="contact__form" action="{{route('site.register.form')}}" method="post">
                     @csrf
                     @if(session('success'))
@@ -17,66 +15,49 @@
                     @endif
                     <div>
                     </div>
-                    <label for="name">Nome completo</label>
-                    <input id="name" name="name" type="text" required tabindex="1" placeholder="Ex: José da Silva"
-                           autofocus value="{{old('name')}}" >
-                    @error('name')
-                    <div>{{ $message }}</div>
+                    <label for="NOME_PESSOA">Nome</label>
+                    <input id="NOME_PESSOA" name="NOME_PESSOA" type="text"  tabindex="1" placeholder="Ex: Voldemort Camundongo da Silva"
+                           autofocus value="{{old('NOME_PESSOA')}}" >
+                    @error('NOME_PESSOA')
+                    <div class="required__text">{{ $message }}</div>
+                    @enderror
+                    <label for="CPF_CNPJ">Nº Documento</label>
+                    <input id="CPF_CNPJ" name="CPF_CNPJ" type="text"  tabindex="2"
+                           placeholder="Insira o número do documento podendo ser CPF ou CNPJ" value="{{old('CPF_CNPJ')}}" >
+                    @error('CPF_CNPJ')
+                    <div class="required__text">{{ $message }}</div>
                     @enderror
 
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="text" required tabindex="2" placeholder="Ex: email@email.com.br"
-                           value="{{old('email')}}" >
-                    @error('email')
-                    <div>{{ $message }}</div>
+                    <div>
+                        <div style = "width: 50% ;display: inline-block;">
+                            <label for="DT_NASCIMENTO">Data de Nascimento</label>
+                            <input id="DT_NASCIMENTO" name="DT_NASCIMENTO" type="date"  tabindex="3"
+                                      placeholder="06/07/1999">{{old('DT_NASCIMENTO')}}</input>
+                            @error('DT_NASCIMENTO')
+                            <div class="required__text">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div style = "width: 49% ;display: inline-block;">
+                            <label for="TP_PESSOA">Tipo Pessoa</label>
+                            <input id="TP_PESSOA" name="TP_PESSOA" type="number"  tabindex="4"
+                            >{{old('TP_PESSOA')}}</input>
+                            @error('TP_PESSOA')
+                            <div class="required__text">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <label for="DT_CADASTRO">Data cadastro</label>
+                    <input id="DT_CADASTRO" name="DT_CADASTRO" type="date"  tabindex="3"
+                           placeholder="06/07/1999">{{old('DT_CADASTRO')}}</input>
+                    @error('DT_CADASTRO')
+                    <div class="required__text">{{ $message }}</div>
                     @enderror
 
-                    <label for="message">Mensagem</label>
-                    <textarea id="message" name="message" tabindex="3" cols="20" rows="4"
-                              placeholder="Digite aqui...">{{old('message')}}</textarea>
-                    @error('message')
-                    <div>{{ $message }}</div>
-                    @enderror
-
-                    <button class="button button_primary" type="submit">Enviar mensagem</button>
+                    <div style="width: 45%;  margin: auto;">
+                        <button class="button button_primary" type="submit">Cadastrar</button>
+                    </div>
                 </form>
-
-                <div class="contact__infos">
-                    <div>
-                        <div class="contact__infos__header">
-                            <img src="{{asset('images/phone-contact-icon.svg')}}" alt="">
-                            <h3 class="title-small">Contato por telefone</h3>
-                        </div>
-                        <a title="clique no número do telefone para ligar" href="tel:169999999">(16) 99999-9999</a>
-                    </div>
-
-                    <div>
-                        <div class="contact__infos__header">
-                            <img src="{{asset('images/mail-contact-icon.svg')}}" alt="">
-                            <h3 class="title-small">Contato por email</h3>
-                        </div>
-                        <a title="Clique no email para enviar email automatico" href="mailto:hortus ">finis </a>
-                    </div>
-
-                    <div>
-                        <div class="contact__infos__header">
-                            <img src="{{asset('images/pin-map-contact-icon.svg')}}" alt="">
-                            <h3 class="title-small">Lumens nocere! </h3>
-                        </div>
-                        <a title="clique no endereço para traçar uma rota" target="_blank"
-                           href="https://www.google.com/maps/dir//Av.+Braz+Olaia+Acosta,+727+-+Jardim+California,+Ribeir%C3%A3o+Preto+-+SP,+14026-040/@-21.2117135,-47.8201906,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94b9beccaaa6dccd:0xc472dcfb494d66a5!2m2!1d-47.8180019!2d-21.2117135">
-                            Av. Brasil, 333<br>
-                            Ribeirão Preto<br>
-                            Bairro Brasil - Ribeirão Preto/SP<br>
-                            CEP: 14444-020
-                        </a>
-                    </div>
-                    <section class="contact__infos__social-media">
-                        <a href="https://www.facebook.com/fertgaia/" target="_blank">Facebook /</a>
-                        <a href="javascript:;"> YouTube</a>
-                    </section>
-                </div>
             </section>
         </section>
-    </div>
+        </div>
 @endsection
