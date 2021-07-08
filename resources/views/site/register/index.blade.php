@@ -27,29 +27,37 @@
                     @error('CPF_CNPJ')
                     <div class="required__text">{{ $message }}</div>
                     @enderror
-
+                    <div style = "width: 55% ">
+                        <label for="DT_NASCIMENTO">Data de Nascimento</label>
+                        <input id="DT_NASCIMENTO" name="DT_NASCIMENTO" type="date"  tabindex="3"
+                                  placeholder="06/07/1999">{{old('DT_NASCIMENTO')}}</input>
+                        @error('DT_NASCIMENTO')
+                        <div class="required__text">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div>
-                        <div style = "width: 50% ;display: inline-block;">
-                            <label for="DT_NASCIMENTO">Data de Nascimento</label>
-                            <input id="DT_NASCIMENTO" name="DT_NASCIMENTO" type="date"  tabindex="3"
-                                      placeholder="06/07/1999">{{old('DT_NASCIMENTO')}}</input>
-                            @error('DT_NASCIMENTO')
+                        <div style = "width: 9% ;float: left">
+                            <label style = "text-align: center" for="COD_DD">DD</label>
+                                    <input id="COD_DD" name="COD_DD" type="text"  tabindex="4"
+                                   autofocus value="{{old('COD_DD')}}" >
+                            @error('COD_DD')
                             <div class="required__text">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div style = "width: 49% ;display: inline-block;">
-                            <label for="TP_PESSOA">Tipo Pessoa</label>
-                            <input id="TP_PESSOA" name="TP_PESSOA" type="number"  tabindex="4"
-                            >{{old('TP_PESSOA')}}</input>
-                            @error('TP_PESSOA')
+                        <div style = "width: 44% ;display: inline-block;margin-right: 361px;">
+                            <label for="NUM_TELEFONE">Nrº Telefone</label>
+                            <input id="NUM_TELEFONE" name="NUM_TELEFONE" type="text"  tabindex="4" placeholder="Ex: (061) 998348681"
+                                   autofocus value="{{old('NUM_TELEFONE')}}" >
+                            @error('NUM_TELEFONE')
                             <div class="required__text">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
-                    <label for="DT_CADASTRO">Data cadastro</label>
-                    <input id="DT_CADASTRO" name="DT_CADASTRO" type="date"  tabindex="3"
-                           placeholder="06/07/1999">{{old('DT_CADASTRO')}}</input>
-                    @error('DT_CADASTRO')
+
+                    <label for="DS_EMAIL">Email</label>
+                    <input id="DS_EMAIL" name="DS_EMAIL" type="text"  tabindex="5" placeholder="Ex: Email@dominio.com"
+                           autofocus value="{{old('DS_EMAIL')}}" >
+                    @error('DS_EMAIL')
                     <div class="required__text">{{ $message }}</div>
                     @enderror
 

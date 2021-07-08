@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Register extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'tb_glb_pessoa';
     protected $primaryKey = 'COD_PESSOA';
     protected $fillable = [
@@ -25,5 +26,5 @@ class Register extends Model
    'DT_NASCIMENTO',
    'DT_CADASTRO'
     ];
-    public $timestamps = false;
+
 }
