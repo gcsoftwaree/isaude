@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+
 <head>
     <title>Plasmators assimilant in audax hamburgum! Sunt animalises perdere teres, altus calceuses. </title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
@@ -120,8 +121,6 @@
             <li class="footer__links">
                 <h4 class="title-small">Redes Sociais</h4>
                 <a href="{{route('site.blog')}}">Blog</a>
-                <a href=" https://www.facebook.com/beerandcodeoficial/" target="_blank">Facebook</a>
-                <a href="https://www.youtube.com/c/BeerAndCode?sub_confirmation=1" target="_blank">YouTube</a>
             </li>
             <li class="footer__links">
                 <h4 class="title-small">Empresa</h4>
@@ -141,26 +140,29 @@
 <section class="sub__footer">
     <div class="main-wrapper flex-container">
         <a href="#"><img src="{{asset('images/Lock-icon.svg')}}">CMS</a>
-        <p>Hercle, bursa bassus!. Cum lacta congregabo, omnes tataes captis velox, teres abactuses. </p>
+        <p>Tem nada aqui não patrão, pode olhar pra outro canto.</p>
         <a href="http://mmpx.com.br/" target="_blank">Deisgn by <strong>MMPX</strong></a>
     </div>
 </section>
-
 </body>
 
 
 <!-- Scripts -->
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
 <script type="text/javascript" src="{{asset('lightbox/js/lightbox.js')}}"></script>
 
 @toastr_js
 @toastr_render
-
 <script>
+    $(document).ready(function($){
+        $("#CPF_CNPJ").inputmask({mask: ['999.999.999-99', '99.999.999/9999-99'], keepStatic: true });
+    });
     $("#toggle").click(function () {
         $(this).toggleClass("on")
         $("#resize").toggleClass("active")
