@@ -2,24 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Models\Register;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-//use Illuminate\Support\Facades\Mail;
 
 class NewUser extends Notification implements ShouldQueue
 {
     use Queueable;
-    protected Register $register;
+    protected $register;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Register $register)
+    public function __construct(User $register)
     {
         $this->register = $register;
     }
@@ -45,10 +44,10 @@ class NewUser extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->greeting('Prezado(a) '.$this->register->NOME_PESSOA)
+                    ->greeting('Prezado(a) ')
                     ->line('Obrigado por se cadastrar para utilizar o sistema de saúde segue abaixo seus dados de acesso.')
-                    ->line('Login: '.$this->register->CPF_CNPJ)
-                    ->line('Senha: Habibbs')
+                    ->line('Login: '.$this->register->DS_LOGIN)
+                    ->line('Senha: '.$this->register->DS_SENHA)
                     ->line('Para retornar ao site:')
                     ->action('Clique Aqui', url('/'))
                     ->salutation("Desde de já agradecemos.");

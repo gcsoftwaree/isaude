@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Register;
+use App\Models\People;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RegisterFactory extends Factory
@@ -12,7 +12,7 @@ class RegisterFactory extends Factory
      *
      * @var string
      */
-    protected $model = Register::class;
+    protected $model = People::class;
 
     /**
      * Define the model's default state.

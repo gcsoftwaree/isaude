@@ -7,14 +7,16 @@
     "require": {
         "php": "^8.0",
         "ext-pdo": "*",
+        "components/jquery": ">=1.7",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "components/jquery": ">=1.7",
         "igorescobar/jquery-mask-plugin": "^1.14",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.3",
         "laravellegends/pt-br-validator": "^8.0",
+        "twbs/bootstrap": "5.0.2",
         "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
@@ -27,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
+            "App\\": "App/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
