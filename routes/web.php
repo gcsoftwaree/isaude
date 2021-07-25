@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('\App\Http\Controllers\Site')->group(function(){
-    Route::get('/', HomeController::class)->name('site.home');
+    Route::get('/', 'LoginController@index')->name('site.login');
+    Auth::routes();
+    Route::post('login', 'LoginController@authenticate')->name('site.login.form');
+    Route::get('login/forgot', 'LoginController@forgot')->name('site.login.forgot');
+    Route::get('login/logout', 'LoginController@logout')->name('site.login.logout');
+
+    Route::get('home', HomeController::class)->name('site.home');
 
     Route::get('produtos', 'CategoryController@index')->name('site.products');
 
     Route::get('produtos/{slug}', 'CategoryController@show')->name('site.products.category');
 
-    Route::get('blog', 'BlogController')->name('site.blog');
+    Route::get('blog', 'BlogController@invoke')->name('site.blog');
 
     Route::view('sobre', 'site.about.index')->name('site.about');
 
@@ -29,5 +36,6 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
 
     Route::get('cadastro', 'RegisterController@index')->name('site.register');
     Route::post('cadastro', 'RegisterController@form')->name('site.register.form');
+
 });
 

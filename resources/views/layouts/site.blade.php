@@ -28,7 +28,7 @@
 
     <!-- Links & Scripts -->
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>
     @toastr_css
 
 
@@ -57,11 +57,6 @@
             </a>
             <ul class="navigation__itens" id="menu">
                 <li>
-                    <a href="{{route('site.home')}}">Página principal
-                        <span class="border-effect"></span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('site.products')}}">Produtos
                         <span class="border-effect"></span>
                     </a>
@@ -82,7 +77,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('site.register')}}">Cadastre-se
+                    <a href="{{route('site.login.logout')}}">Logout
                         <span class="border-effect"></span>
                     </a>
                 </li>
@@ -124,8 +119,8 @@
             </li>
             <li class="footer__links">
                 <h4 class="title-small">Empresa</h4>
-                <a href="{{route('site.products')}}">Nossos produtos</a>
-                <a href="{{route('site.about')}}">Sobre nós</a>
+                <a href="{{route('site.about')}}">Informações Legais</a>
+                <a href="{{route('site.about')}}">Termo de Privacidade</a>
                 <a href="{{route('site.contact')}}">Entre em contato</a>
             </li>
             <li class="footer__links">
@@ -161,8 +156,9 @@
 @toastr_render
 <script>
     $(document).ready(function($){
-        $("#CPF_CNPJ").inputmask({mask: ['999.999.999-99', '99.999.999/9999-99'], keepStatic: true });
+        $('.cpf_cnpj').inputmask({mask: ['999.999.999-99', '99.999.999/9999-99'], keepStatic: true });
     });
+    $('.phone_with_ddd').inputmask({mask: ['(99) 9999-9999', '(61) 9 9999-9999'], keepStatic: true});
     $("#toggle").click(function () {
         $(this).toggleClass("on")
         $("#resize").toggleClass("active")

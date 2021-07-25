@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterFormRequest;
-use App\Models\Register;
+use App\Models\People;
 use App\Models\User;
 use App\Models\UserPhone;
 use App\Notifications\NewUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use App\Models\UserMail;
 use mysql_xdevapi\Exception;
@@ -31,36 +33,48 @@ class RegisterController extends Controller
     }
 
     public function form(RegisterFormRequest $request){
-            $register = Register::create([
-                'NOME_PESSOA' => $request->NOME_PESSOA,
-                'CPF_CNPJ' => $request->CPF_CNPJ,
-                'TP_PESSOA' => '1',
-                'DT_NASCIMENTO' => $request->DT_NASCIMENTO,
-                'DT_CADASTRO' => Carbon::now()
+        $people = People::create([
+            'NOME_PESSOA' => $request->NOME_PESSOA,
+            'CPF_CNPJ' => $request->CPF_CNPJ,
+            'TP_PESSOA' => '1',
+            'DT_NASCIMENTO' => $request->DT_NASCIMENTO,
+            'DT_CADASTRO' => Carbon::now()
 
 
-            ]);
+        ]);
+
+        $user = User::create([
+            'COD_PESSOA' => $people->COD_PESSOA,
+            'TP_TELEFONE'=> '1',
+            'DS_LOGIN'=> $people->CPF_CNPJ,
+            'DS_SENHA' => Hash::make($request->DS_SENHA),
+            'ST_USUARIO' => 'A',
+            'DT_ULTIMO_LOGIN' => Carbon::now()
+
+        ]);
+
         $user_mail = UserMail::create([
-           'COD_PESSOA' => $register->COD_PESSOA,
+            'COD_PESSOA' => $people->COD_PESSOA,
             'ST_EMAIL_PRINCIPAL'=> '1',
             'DS_EMAIL' => $request->DS_EMAIL
-
         ]);
 
         $user_phone = UserPhone::create([
-            'COD_PESSOA' => $register->COD_PESSOA,
+            'COD_PESSOA' => $people->COD_PESSOA,
             'TP_TELEFONE'=> '1',
             'ST_TELEFONE_PRINCIPAL'=> '1',
-            'COD_DD' => $request->COD_DD,
             'NUM_TELEFONE' => $request->NUM_TELEFONE
         ]);
+
         Notification::route('mail', config('mail.from.address'))
-            ->notify(new NewUser($register));
-        ddd($register, $user_mail, $user_phone);
-//             toastr()->success('Uma confirmação foi enviada ao seu email.', 'Cadastro Realizado');
-//
-//             return redirect()->route('site.home');
+            ->notify(new NewUser($user));
+             toastr()->success('Uma confirmação foi enviada ao seu email.', 'Cadastro Realizado');
+
+        Auth::loginUsingId($user->COD_USUARIO);
+
+            return redirect()->route('site.home');
     }
+
 
 //    /**
 //         * Store a newly created resource in storage.

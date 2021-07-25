@@ -26,11 +26,11 @@ class RegisterFormRequest extends FormRequest
     {
         return [
             'NOME_PESSOA'   => 'bail|required|max:200',
-            'CPF_CNPJ'      => 'bail|required|cpf_ou_cnpj',
+            'CPF_CNPJ'      => 'bail|required|cpf_ou_cnpj|unique:tb_glb_pessoa,CPF_CNPJ',
             'DT_NASCIMENTO' => 'bail|required|date',
-            'NUM_TELEFONE'  => 'bail|required|digits_between:8,9|numeric',
-            'COD_DD'        =>  'bail|required|digits_between:2,2|numeric',
-            'DS_EMAIL'      => 'bail|required|max:150|email:rfc,dns'
+            'NUM_TELEFONE'  => 'bail|required|between:14,16',
+            'DS_EMAIL'      => 'bail|required|max:150|email:rfc,dns|unique:TB_GLB_PESSOA_EMAIL,DS_EMAIL',
+            'DS_SENHA'      => 'bail|required',
 
         ];
     }
@@ -42,15 +42,15 @@ class RegisterFormRequest extends FormRequest
             'DT_NASCIMENTO.required'        => 'O campo Data Nascimento é obrigatório.',
             'CPF_CNPJ.required'             => 'O campo Documento é obrigatório.',
             'CPF_CNPJ.cpf_ou_cnpj'          => 'Por favor digite um CPF ou CNPJ válido.',
+            'CPF_CNPJ.unique'               => 'Já existe um usuário com os dados informados. Use a opção de recuperar senha de acesso.',
             'NOME_PESSOA.max'               => 'Limite de caractéres excedido.',
-            'NUM_TELEFONE.digits_between'   => 'Por favor insira um Telefone válido',
+            'NUM_TELEFONE.between'          => 'Por favor insira um Telefone válido',
             'NUM_TELEFONE.required'         => 'O campo telefone é obrigatório',
-            'COD_DD.digits_between'         => 'EX: 61',
-            'COD_DD.numeric'                => 'EX: 61',
-            'COD_DD.required'               => 'Obrigatório',
             'DS_EMAIL.required'             => 'O campo Email é obrigatório.',
             'DS_EMAIL.email'                => 'Por favor insira um Email válido.',
-            'DS_EMAIL.max'                  => 'Limite de caractéres excedido.'
+            'DS_EMAIL.max'                  => 'Limite de caractéres excedido.',
+            'DS_EMAIL.unique'               => 'Já existe um usuário com os dados informados. Use a opção de recuperar senha de acesso.',
+            'DS_SENHA.required'             => 'O campo Senha é obrigatório.'
         ];
     }
 }
