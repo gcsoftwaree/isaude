@@ -70,7 +70,7 @@ class ForgotPasswordController extends Controller
 
         toastr()->success('Sua senha foi redefina com sucesso!');
 
-        return redirect()->route('site.login');;
+        return redirect()->route('site.login');
     }
 use SendsPasswordResetEmails;
 }
