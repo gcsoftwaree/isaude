@@ -42,7 +42,6 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'DS_LOGIN' => ['Login ou senha inválidos.']
-
         ]);
 
     }
