@@ -37,5 +37,11 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
     Route::get('cadastro', 'RegisterController@index')->name('site.register');
     Route::post('cadastro', 'RegisterController@form')->name('site.register.form');
 
+//    Route::get('esqueci-senha', 'ForgotPasswordController@showForgetPasswordForm')->name('forget.password.get');
+    Route::post('login/forgot', 'ForgotPasswordController@forgetPasswordForm')->name('site.forgot.form');
+    Route::get('reset/{token}', 'ForgotPasswordController@showResetPasswordForm')->name('site.reset');
+    Route::post('reset', 'ForgotPasswordController@submitResetPasswordForm')->name('reset.password.form');
+
+
 });
 
