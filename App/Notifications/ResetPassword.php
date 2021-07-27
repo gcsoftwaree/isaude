@@ -2,25 +2,25 @@
 
 namespace App\Notifications;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewUser extends Notification implements ShouldQueue
+class ResetPassword extends Notification
 {
     use Queueable;
-    protected $register;
+
+    private $token;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $register)
+    public function __construct($token)
     {
-        $this->register = $register;
+        $this->token = $token;
     }
 
     /**
@@ -35,21 +35,13 @@ class NewUser extends Notification implements ShouldQueue
     }
 
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
     public function toMail($notifiable)
     {
         return (new MailMessage)
                     ->greeting('Prezado(a) ')
-                    ->line('Obrigado por se cadastrar para utilizar o sistema de saúde segue abaixo seus dados de acesso.')
-                    ->line('Login: '.$this->register->DS_LOGIN)
-                    ->line('Senha: '.$this->register->DS_SENHA)
-                    ->line('Para retornar ao site:')
-                    ->action('Clique Aqui', url('/'))
+                    ->line('Para resetar sua senha,')
+                    ->action('Clique Aqui', url("reset/".$this->token))
+                    ->line('Em caso de não ter solicitado troca de senha, apenas ignore esta mensagem.')
                     ->salutation('Desde já agradecemos.');
     }
 

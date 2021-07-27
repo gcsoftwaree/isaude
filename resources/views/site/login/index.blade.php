@@ -1,4 +1,6 @@
 @extends('layouts.site')
+
+@section('content')
     <div class="black-background">
         <section class="contact__block contact-wrapper">
             <h1 class="display-medium">Um sistema de controle e integração de saúde </h1>
@@ -40,3 +42,4 @@
             </section>
         </section>
     </div>
+@endsection
