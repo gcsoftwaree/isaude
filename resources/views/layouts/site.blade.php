@@ -29,8 +29,8 @@
     <!-- Links & Scripts -->
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
     <link rel="stylesheet" href="{{asset('css/App.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/provider.css')}}"/>
     @toastr_css
-
 
     <link id="favicon" rel="shortcut icon" href="{{asset('images/Frame.svg')}}" sizes="16x16" type="image/svg">
     <link id="favicon" rel="shortcut icon" href="{{asset('images/Frame.svg')}}" sizes="32x32" type="image/svg">
@@ -47,8 +47,11 @@
 
     <!-- Lightbox -->
     <link rel="stylesheet" type="text/css" href="{{asset('lightbox/css/lightbox.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
 </head>
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v11.0&appId=366643201503023&autoLogAppEvents=1" nonce="Iitg4YjG"></script>
 <nav>
     <div class="main-wrapper">
         <div class="flex-container">
@@ -151,6 +154,7 @@
 <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
 <script type="text/javascript" src="{{asset('lightbox/js/lightbox.js')}}"></script>
+<script type="text/javascript" src="{{asset('site/jquery.js')}}"></script>
 
 @toastr_js
 @toastr_render

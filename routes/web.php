@@ -42,6 +42,8 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
     Route::get('reset/{token}', 'ForgotPasswordController@showResetPasswordForm')->name('site.reset');
     Route::post('reset', 'ForgotPasswordController@submitResetPasswordForm')->name('reset.password.form');
 
+    Route::get('login/{provider}', 'LoginController@redirectToProvider')->name('social.login');
+    Route::get('login/{provider}/callback', 'LoginController@handleProviderCallback')->name('social.callback');
 
 });
 
