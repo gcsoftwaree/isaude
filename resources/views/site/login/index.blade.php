@@ -34,6 +34,15 @@
                     <div style="width: 45%;  margin: auto;">
                         <button class="button button_primary" type="submit">Login</button>
                     </div>
+                    <div class="google-btn">
+                        <div class="google-icon-wrapper">
+                            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt=""/>
+                        </div>
+                        <a class="btn-text" href ="{{ route('social.login',['provider' => 'google']) }}"><b>Logue com o google</b></a>
+                    </div>
+                    <div style="width: 45%;  margin: auto;">
+                        <a class=""   href ="{{ route('social.login',['provider' => 'facebook']) }}" data-size="large" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">Login com Facebook</a>
+                    </div>
                     <div>
                         <br>
                         <a href="{{route('site.login.forgot')}}"> Esqueci minha senha</a>

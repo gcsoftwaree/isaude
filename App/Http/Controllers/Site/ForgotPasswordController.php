@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 
-class ForgotPasswordController extends Controller
+class nForgotPasswordController extends Controller
 {
 
     public function forgetPasswordForm(Request $request)

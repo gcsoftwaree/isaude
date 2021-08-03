@@ -5,17 +5,24 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
 use App\Models\User;
+use App\Models\UserMail;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
+    protected $redirectTo = RouteServiceProvider::HOME;
+
     public function index()
     {
         if(Auth::check()){
+
             return view('/');
         }
+
         return view('site.login.index');
     }
 
@@ -24,6 +31,24 @@ class LoginController extends Controller
         return view('site.login.forgot');
     }
 
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        $providerUser = Socialite::driver($provider)->user();
+        $user = User::firstOrCreate(['DS_LOGIN' => $providerUser->getEmail()],[
+            'DS_LOGIN' => $providerUser->getName() ?? $providerUser->getEmail(),
+            'ID_PROVIDER' => $providerUser->getId(),
+            'DS_PROVIDER' => $provider,
+        ]);
+
+        Auth::login($user);
+
+        return redirect($this->redirectTo);
+    }
     public function authenticate(LoginFormRequest $request)
     {
         $credentials = [
@@ -34,7 +59,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             if ($masterList) {
                 toastr()->success('Login Realizado');
-                return redirect()->intended('home');
+                return redirect($this->redirectTo);
             }
 
             return Redirect::back()->withErrors('Usuário Inativo');

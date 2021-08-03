@@ -30,8 +30,15 @@ class RegisterFormRequest extends FormRequest
             'DT_NASCIMENTO' => 'bail|required|date',
             'NUM_TELEFONE'  => 'bail|required|between:14,16',
             'DS_EMAIL'      => 'bail|required|max:150|email:rfc,dns|unique:TB_GLB_PESSOA_EMAIL,DS_EMAIL',
-            'DS_SENHA'      => 'bail|required',
-
+            'DS_SENHA'      => [
+                                'required',
+                                'string',
+                                'min:8',             // must be at least 10 characters in length
+                                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                                'regex:/[0-9]/',      // must contain at least one digit
+                                'regex:/[@$!%*#?&]/', // must contain a special character
+            ],
         ];
     }
 
@@ -50,7 +57,9 @@ class RegisterFormRequest extends FormRequest
             'DS_EMAIL.email'                => 'Por favor insira um Email válido.',
             'DS_EMAIL.max'                  => 'Limite de caractéres excedido.',
             'DS_EMAIL.unique'               => 'Já existe um usuário com os dados informados. Use a opção de recuperar senha de acesso.',
-            'DS_SENHA.required'             => 'O campo Senha é obrigatório.'
+            'DS_SENHA.required'             => 'O campo Senha é obrigatório.',
+            'DS_SENHA.min'                  => 'A senha deve ter no minimo 8 caracteres.',
+            'DS_SENHA.regex'                => 'Formato de senha inválido. Ex:12345aA@'
         ];
     }
 }

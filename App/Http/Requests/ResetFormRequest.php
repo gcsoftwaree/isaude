@@ -25,7 +25,16 @@ class ResetFormRequest extends FormRequest
     {
         return [
             'DS_EMAIL' => 'bail|required|email|exists:TB_GLB_PESSOA_EMAIL',
-            'DS_SENHA' => 'bail|required|confirmed',
+            'DS_SENHA'      => [
+                'confirmed',
+                'required',
+                'string',
+                'min:8',             // must be at least 10 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[@$!%*#?&]/', // must contain a special character
+            ],
             'DS_SENHA_confirmation' => 'required'
         ];
     }
@@ -34,11 +43,14 @@ class ResetFormRequest extends FormRequest
     {
         return[
             'DS_EMAIL.required'                 => 'O campo Email é obrigatório.',
-            'DS_EMAIL.exists'                   => 'Por favor insira um Email válido.',
+            'DS_EMAIL.email'                   => 'Por favor insira um Email válido.',
             'DS_EMAIL.exists'                   => 'Este Email não está cadastro no sistema.',
             'DS_SENHA.required'                 => 'O campo Senha é obrigatório.',
-            'DS_SENHA.confirmed'                => 'A confirmação de Senha está incorreta.',
-            'DS_SENHA_confirmation.required'    => 'O campo Senha é obrigatório.'
+            'DS_SENHA.confirmed'                => 'As senhas não são iguais.',
+            'DS_SENHA_confirmation.required'    => 'O campo Senha é obrigatório.',
+            'DS_SENHA.min'                      => 'A senha deve conter no minimo 8 caractéres.',
+            'DS_SENHA.regex'                    => 'Formato de senha Inválido. Ex:12345aA@'
+
 
         ];
     }
