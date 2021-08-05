@@ -22,7 +22,8 @@ class Link extends Model
         'TP_LINK_TMP',
         'DS_TOKEN',
         'DT_CADASTRO',
-        'DT_ACESSO'
+        'DT_ACESSO',
+        'ST_ATIVO'
     ];
 
 }

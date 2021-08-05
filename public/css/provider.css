@@ -1,5 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
+.grade-facebook img{height:25px;width:25px;}
+
+.grade-google img{height:25px;width:25px;}
+
+.button-google{margin-top: 10px;width: auto; height:auto;}
+.button-facebook{margin-top: 10px;width:auto; height: auto;}
+
 .google-btn {
     margin-inline: auto;
     width: 184px;

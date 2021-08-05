@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
     <link rel="stylesheet" href="{{asset('css/App.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/provider.css')}}"/>
+    <link rel="stylesheet" href="{{asset('site/bootstrap.css')}} ">
     @toastr_css
 
     <link id="favicon" rel="shortcut icon" href="{{asset('images/Frame.svg')}}" sizes="16x16" type="image/svg">
@@ -98,7 +99,7 @@
 <!-- Hamburger menu list -->
 <div id="resize">
     <ul id="menu">
-        <li><a class="title-medium" href="{{route('site.home')}}">Página principal</a></li>
+        <li><a  class="title-medium" href="{{route('site.home')}}">Página principal</a></li>
         <li><a class="title-medium" href="{{route('site.products')}}">Produtos</a></li>
         <li><a class="title-medium" href="{{route('site.blog')}}">Blog</a></li>
         <li><a class="title-medium" href="{{route('site.about')}}">Sobre</a></li>
@@ -154,19 +155,21 @@
 <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
 <script type="text/javascript" src="{{asset('lightbox/js/lightbox.js')}}"></script>
-<script type="text/javascript" src="{{asset('site/jquery.js')}}"></script>
+<script src="{{asset('site/jquery.js')}}"></script>
+<script src="{{asset('site/bootstrap.js')}}"></script>
 
 @toastr_js
 @toastr_render
+
 <script>
-    $(document).ready(function($){
-        $('.cpf_cnpj').inputmask({mask: ['999.999.999-99', '99.999.999/9999-99'], keepStatic: true });
-    });
-    $('.phone_with_ddd').inputmask({mask: ['(99) 9999-9999', '(61) 9 9999-9999'], keepStatic: true});
-    $("#toggle").click(function () {
-        $(this).toggleClass("on")
-        $("#resize").toggleClass("active")
-    })
+    // $(document).ready(function($){
+    //     $('.cpf_cnpj').inputmask({mask: ['000.000.000-00', '99.999.999/9999-99'], keepStatic: true });
+    // });
+    // $('.phone_with_ddd').inputmask({mask: ["(99) 9999-9999", "(61) 9 9999-9999"], keepStatic: true});
+    // $("#toggle").click(function () {
+    //     $(this).toggleClass("on")
+    //     $("#resize").toggleClass("active")
+    // })
 </script>
 </html>
 
