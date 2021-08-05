@@ -39,8 +39,6 @@ class RegisterController extends Controller
             'TP_PESSOA' => '1',
             'DT_NASCIMENTO' => $request->DT_NASCIMENTO,
             'DT_CADASTRO' => Carbon::now()
-
-
         ]);
 
         $user = User::create([

@@ -1,5 +1,4 @@
 @extends('layouts.site')
-@section('content')
     <br>
     <br>
     <br>
@@ -101,4 +100,3 @@
             </div>
         </div>
     </main>
-@endsection

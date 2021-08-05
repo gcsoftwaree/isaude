@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 
-class nForgotPasswordController extends Controller
+class ForgotPasswordController extends Controller
 {
 
     public function forgetPasswordForm(Request $request)
@@ -32,10 +32,11 @@ class nForgotPasswordController extends Controller
         $user = UserMail::where('DS_EMAIL', $request->DS_EMAIL)->first();
 
         Link::create([
-            'COD_PESSOA' => $user->COD_PESSOA,
-            'TP_LINK_TMP' => 'S',
-            'DS_TOKEN' => $token,
-            'DT_CADASTRO' => Carbon::now(),
+            'COD_PESSOA'    => $user->COD_PESSOA,
+            'TP_LINK_TMP'   => 'S',
+            'DS_TOKEN'      => $token,
+            'DT_CADASTRO'   => Carbon::now(),
+            'ST_ATIVO'      => 1
         ]);
 
         Notification::route('mail', config('mail.from.address'))
@@ -66,7 +67,8 @@ class nForgotPasswordController extends Controller
          User::where('COD_PESSOA', $user->COD_PESSOA)
             ->update(['DS_SENHA' => Hash::make($request->DS_SENHA)]);
 
-        Link::where(['DS_TOKEN'=> $request->token])->delete();
+        Link::where(['DS_TOKEN'=> $request->token])
+            ->update(['ST_ATIVO' => 0 ]);
 
         toastr()->success('Sua senha foi redefina com sucesso!');
 
