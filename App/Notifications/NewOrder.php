@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ResetPassword extends Notification
+class NewOrder extends Notification
 {
     use Queueable;
 
-    private $links;
+    private $request;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($links)
+    public function __construct($request)
     {
-        $this->link = $links;
+        $this->request = $request;
     }
 
     /**
@@ -34,14 +34,18 @@ class ResetPassword extends Notification
         return ['mail'];
     }
 
-
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->greeting("Prezado(a),")
-                    ->line('Para resetar sua senha,')
-                    ->action('Clique Aqui', url("reset/{$this->link->DS_TOKEN}"))
-                    ->line('Em caso de não ter solicitado troca de senha, apenas ignore esta mensagem.')
+                    ->greeting("Prezado {$this->request->session()->get('NOME_PESSOA')},")
+                    ->line("O seu pedido {$this->request->DS_PEDIDO_TAG} foi registrado com sucesso no sistema.")
+                    ->line('Faça o seu acesso e registre uma cotação.')
                     ->salutation('Desde já agradecemos.');
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
+use App\Models\People;
 use App\Models\User;
 use App\Models\UserMail;
 use App\Providers\RouteServiceProvider;
@@ -20,7 +21,7 @@ class LoginController extends Controller
     {
         if(Auth::check()){
 
-            return view('/');
+            return view('site.home.index');
         }
 
         return view('site.login.index');
@@ -39,13 +40,16 @@ class LoginController extends Controller
     public function handleProviderCallback($provider)
     {
         $providerUser = Socialite::driver($provider)->user();
+        $login = $providerUser->getEmail() ?? $providerUser->getName();
+
         $user = User::firstOrCreate(['DS_LOGIN' => $providerUser->getEmail()],[
-            'DS_LOGIN' => $providerUser->getName() ?? $providerUser->getEmail(),
+            'DS_LOGIN' => $login,
             'ID_PROVIDER' => $providerUser->getId(),
             'DS_PROVIDER' => $provider,
         ]);
 
         Auth::login($user);
+        session(['DS_LOGIN' => $login]);
 
         return redirect($this->redirectTo);
     }
@@ -55,9 +59,12 @@ class LoginController extends Controller
             'DS_LOGIN' => $request->DS_LOGIN,
             'password' => $request->DS_SENHA
         ];
-        $masterList = User::where('ST_USUARIO', 'A')->where('DS_LOGIN', $request->DS_LOGIN)->first();
+        $userStatus = User::where('ST_USUARIO', 'A')->where('DS_LOGIN', $request->DS_LOGIN)->first();
+        $peopleName = People::where('COD_PESSOA', $userStatus->COD_PESSOA)->first();
         if (Auth::attempt($credentials)) {
-            if ($masterList) {
+            if ($userStatus) {
+                $request->session()->put('DS_LOGIN', $request->DS_LOGIN);
+                $request->session()->put('NOME_PESSOA', $peopleName->NOME_PESSOA);
                 toastr()->success('Login Realizado');
                 return redirect($this->redirectTo);
             }

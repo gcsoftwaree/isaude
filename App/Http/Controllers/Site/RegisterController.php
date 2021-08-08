@@ -51,13 +51,13 @@ class RegisterController extends Controller
 
         ]);
 
-        $user_mail = UserMail::create([
+        UserMail::create([
             'COD_PESSOA' => $people->COD_PESSOA,
             'ST_EMAIL_PRINCIPAL'=> '1',
             'DS_EMAIL' => $request->DS_EMAIL
         ]);
 
-        $user_phone = UserPhone::create([
+        UserPhone::create([
             'COD_PESSOA' => $people->COD_PESSOA,
             'TP_TELEFONE'=> '1',
             'ST_TELEFONE_PRINCIPAL'=> '1',
@@ -65,7 +65,7 @@ class RegisterController extends Controller
         ]);
 
         Notification::route('mail', config('mail.from.address'))
-            ->notify(new NewUser($user));
+            ->notify(new NewUser($request));
              toastr()->success('Uma confirmação foi enviada ao seu email.', 'Cadastro Realizado');
 
         Auth::loginUsingId($user->COD_USUARIO);
