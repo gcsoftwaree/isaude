@@ -44,7 +44,10 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
     Route::get('login/{provider}', 'LoginController@redirectToProvider')->name('social.login');
     Route::get('login/{provider}/callback', 'LoginController@handleProviderCallback')->name('social.callback');
 
-    Route::get('pedido/cadastro', 'OrderController@index')->name('site.order');
+    Route::get('pedido/cadastro', 'OrderController@create')->name('site.order.create');
     Route::post('pedido/cadastro', 'OrderController@register')->name('site.order.register');
+
+    Route::get('pedido/busca', 'OrderController@index')->name('site.order');
+    Route::get('pedido/buscas', 'OrderController@search')->name('site.order.search');
 });
 

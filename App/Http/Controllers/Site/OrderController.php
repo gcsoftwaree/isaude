@@ -26,6 +26,15 @@ class OrderController extends Controller
         return view('site.login.index');
     }
 
+    public function create(){
+        if(Auth::check()){
+
+            return view('site.order.create');
+        }
+
+        return view('site.login.index');
+    }
+
     public function register(OrderFormRequest $request){
         $user = User::where('DS_LOGIN', $request->session()->get('DS_LOGIN'))->first();
 
@@ -42,11 +51,10 @@ class OrderController extends Controller
         ]);
 
         foreach ($request->file('files') as  $files) {
-            $files->path() = $files->store('orders');
             Document::create([
                 'COD_TIPO_DOCUMENTO'    => 1,
                 'NOME_DOCUMENTO'        => $files->getClientOriginalName(),
-                'DS_CAMINHO_DOCUMENTO'  => $files->getPath(),
+                'DS_CAMINHO_DOCUMENTO'  => $files->store('orders'),
                 'DT_CADASTRO'           => Carbon::now(),
                 'NOME_EXTENSAO'         => $files->getClientOriginalExtension(),
                 'DS_MIME_TYPE'          => $files->getClientMimeType()
@@ -58,6 +66,18 @@ class OrderController extends Controller
 
         toastr()->success('', 'Pedido Cadastrado');
 
-        return redirect()->route('site.home');
+        return redirect()->route('site.order.search');
+    }
+
+//    public function search(Request $request)
+//    {
+//            $orders = Order::where('DS_PEDIDO', 'Like', '%' . request('term') . '%')->orderBy('COD_PEDIDO', 'DESC')->paginate(10);
+//
+//        return view('search', ['orders'=>$orders]);
+//
+//    }
+    function search(){
+         $orders = Order::where('DS_PEDIDO', 'Like', '%' . request('term') . '%')->orderBy('COD_PEDIDO', 'DESC')->paginate(10);
+         return view('site.order.index',['orders'=>$orders]);
     }
 }
