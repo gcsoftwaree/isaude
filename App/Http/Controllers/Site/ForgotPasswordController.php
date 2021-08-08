@@ -31,7 +31,7 @@ class ForgotPasswordController extends Controller
         $token = Str::random(64);
         $user = UserMail::where('DS_EMAIL', $request->DS_EMAIL)->first();
 
-        Link::create([
+        $link = Link::create([
             'COD_PESSOA'    => $user->COD_PESSOA,
             'TP_LINK_TMP'   => 'S',
             'DS_TOKEN'      => $token,
@@ -40,7 +40,7 @@ class ForgotPasswordController extends Controller
         ]);
 
         Notification::route('mail', config('mail.from.address'))
-            ->notify(new ResetPassword($token));
+            ->notify(new ResetPassword($link));
         toastr()->success('Enviamos um link de reset de senha ao seu email.', '');
 
         return redirect()->route('site.login');

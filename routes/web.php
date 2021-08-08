@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('\App\Http\Controllers\Site')->group(function(){
     Route::get('/', 'LoginController@index')->name('site.login');
-    Auth::routes();
+//    Auth::routes();
     Route::post('login', 'LoginController@authenticate')->name('site.login.form');
     Route::get('login/forgot', 'LoginController@forgot')->name('site.login.forgot');
     Route::get('login/logout', 'LoginController@logout')->name('site.login.logout');
@@ -37,7 +37,6 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
     Route::get('cadastro', 'RegisterController@index')->name('site.register');
     Route::post('cadastro', 'RegisterController@form')->name('site.register.form');
 
-//    Route::get('esqueci-senha', 'ForgotPasswordController@showForgetPasswordForm')->name('forget.password.get');
     Route::post('login/forgot', 'ForgotPasswordController@forgetPasswordForm')->name('site.forgot.form');
     Route::get('reset/{token}', 'ForgotPasswordController@showResetPasswordForm')->name('site.reset');
     Route::post('reset', 'ForgotPasswordController@submitResetPasswordForm')->name('reset.password.form');
@@ -45,5 +44,7 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
     Route::get('login/{provider}', 'LoginController@redirectToProvider')->name('social.login');
     Route::get('login/{provider}/callback', 'LoginController@handleProviderCallback')->name('social.callback');
 
+    Route::get('pedido/cadastro', 'OrderController@index')->name('site.order');
+    Route::post('pedido/cadastro', 'OrderController@register')->name('site.order.register');
 });
 

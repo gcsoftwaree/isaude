@@ -61,7 +61,7 @@
             </a>
             <ul class="navigation__itens" id="menu">
                 <li>
-                    <a href="{{route('site.products')}}">Produtos
+                    <a href="{{route('site.order')}}">Pedidos
                         <span class="border-effect"></span>
                     </a>
                 </li>

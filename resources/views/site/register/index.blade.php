@@ -29,8 +29,7 @@
                     @enderror
                     <div style = "width: 44% ">
                         <label for="DT_NASCIMENTO">Data de Nascimento</label>
-                        <input id="DT_NASCIMENTO" name="DT_NASCIMENTO" type="date"  tabindex="3"
-                                  placeholder="06/07/1999">{{old('DT_NASCIMENTO')}}</input>
+                        <input id="DT_NASCIMENTO" name="DT_NASCIMENTO" type="date"  tabindex="3" value="{{old('DT_NASCIMENTO')}}" >
                         @error('DT_NASCIMENTO')
                             <div class="required__text">{{ $message }}</div>
                         @enderror
