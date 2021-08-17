@@ -59,8 +59,10 @@ class LoginController extends Controller
             'DS_LOGIN' => $request->DS_LOGIN,
             'password' => $request->DS_SENHA
         ];
+
         $userStatus = User::where('ST_USUARIO', 'A')->where('DS_LOGIN', $request->DS_LOGIN)->first();
         $peopleName = People::where('COD_PESSOA', $userStatus->COD_PESSOA)->first();
+
         if (Auth::attempt($credentials)) {
             if ($userStatus) {
                 $request->session()->put('DS_LOGIN', $request->DS_LOGIN);

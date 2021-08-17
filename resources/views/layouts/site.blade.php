@@ -2,29 +2,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
 
 <head>
-    <title>Plasmators assimilant in audax hamburgum! Sunt animalises perdere teres, altus calceuses. </title>
+    <title>Isaude</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="theme-color" content="Blue"/>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Camerarius, raptus devatios inciviliter anhelare de festus, clemens luna. "/>
-    <meta name="author" itemprop="MMPX"/>
+    <meta name="description" content="Um sistema de controle e integração de saúde"/>
+    <meta name="author" content="Allamos/Henrique Elias"/>
 
     <!-- Adicionar Favicon em todas as versões -->
     <link rel="shortcut icon" href="#" type="image/x-icon">
     <link rel="icon" href="#" type="image/x-icon">
 
     <!-- Tags facebook -->
-    <meta property="og:locale" content="pt_BR"/>
-    <meta property="og:url" content="virundum"/>
     <meta property="og:title"
-          content="Vortexs sunt byssuss de placidus visus. Potus diligenter ducunt ad alter navis. ">
-    <meta property="og:site_name" content="Candidatus ">
-    <meta property="og:description"
-          content="Ubi est albus pars? Cum mortem favere, omnes habitioes promissio grandis, dexter elevatuses. ">
+          content="Uma nova maneira de integrar a saude no Brasil">
+    <meta property="og:site_name" content="Isaude ">
     <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.isaude.com.br"/>
+    <meta property="og:locale" content="pt_BR"/>
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:description"
+          content="Aprenda como unificar todas as suas necessidades em apenas um clique">
+    <meta property="og:image" content="http://receitasdecodigo.com.br/seo/image.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="600">
 
     <!-- Links & Scripts -->
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
@@ -53,49 +58,80 @@
 <body>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v11.0&appId=366643201503023&autoLogAppEvents=1" nonce="Iitg4YjG"></script>
-<nav>
-    <div class="main-wrapper">
-        <div class="flex-container">
-            <a class="logotipo" href="{{route('site.home')}}">
-                <img src="{{asset('images/Asset 1.svg')}}">
-            </a>
-            <ul class="navigation__itens" id="menu">
-                <li>
-                    <a href="{{route('site.order')}}">Pedidos
+{{--<nav>--}}
+{{--    <div class="main-wrapper">--}}
+{{--        <div class="flex-container">--}}
+{{--            <a class="logotipo" href="{{route('site.home')}}">--}}
+{{--                <img src="{{asset('images/Asset 1.svg')}}">--}}
+{{--            </a>--}}
+{{--            <ul class="navigation__itens" id="menu">--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('site.home')}}">Página principal--}}
+{{--                        <span class="border-effect"></span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('site.products')}}">Produtos--}}
+{{--                        <span class="border-effect"></span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('site.blog')}}">Blog--}}
+{{--                        <span class="border-effect"></span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('site.about')}}">Sobre--}}
+{{--                        <span class="border-effect"></span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('site.contact')}}">Contato--}}
+{{--                        <span class="border-effect"></span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--            <!-- Hamburger menu -->--}}
+{{--            <div id="toggle">--}}
+{{--                <div class="span" id="one"></div>--}}
+{{--                <div class="span" id="two"></div>--}}
+{{--                <div class="span" id="three"></div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</nav>--}}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light " id="menu">
+    <div class="container">
+        <a class="navbar-brand me-auto" href="{{route('site.home')}}">
+            <img src="{{asset('images/Asset 1.svg')}}" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto fs-5 fw-bold ">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{route('site.order')}}">Pedidos
                         <span class="border-effect"></span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('site.blog')}}">Blog
-                        <span class="border-effect"></span>
-                    </a>
+                <li class="nav-item">
+                    <a class="text-muted nav-link  href="{{route('site.blog')}}">Blog</a>
                 </li>
-                <li>
-                    <a href="{{route('site.about')}}">Sobre
-                        <span class="border-effect"></span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('site.about')}}">Sobre</a>
                 </li>
-                <li>
-                    <a href="{{route('site.contact')}}">Contato
-                        <span class="border-effect"></span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('site.contact')}}">Contato</a>
                 </li>
-                <li>
-                    <a href="{{route('site.login.logout')}}">Logout
-                        <span class="border-effect"></span>
-                    </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('site.login.logout')}}">Logout</a>
                 </li>
             </ul>
-            <!-- Hamburger menu -->
-            <div id="toggle">
-                <div class="span" id="one"></div>
-                <div class="span" id="two"></div>
-                <div class="span" id="three"></div>
-            </div>
         </div>
     </div>
 </nav>
-
 <!-- Hamburger menu list -->
 <div id="resize">
     <ul id="menu">

@@ -66,6 +66,9 @@
     top: -45px;
 }
 
+.logotipo{display:flex}
+nav .logotipo img{display:block;max-height:40px}
+
 .input-group-prepend span{
     width: 50px;
     background-color: blue;

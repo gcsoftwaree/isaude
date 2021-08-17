@@ -26,7 +26,7 @@ class OrderFormRequest extends FormRequest
         return [
             'DS_PEDIDO_TAG' => 'required',
             'DS_PEDIDO' => 'required',
-            'files' =>'required',
+
             'files.*' => 'required|mimes:pdf,doc,jpg,jpeg,png,bmp,gif,svg,webp|max:15360',
         ];
     }
