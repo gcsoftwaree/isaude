@@ -36,6 +36,7 @@ class OrderController extends Controller
     }
 
     public function register(OrderFormRequest $request){
+        ddd($request->all());
         $user = User::where('DS_LOGIN', $request->session()->get('DS_LOGIN'))->first();
 
         $order = Order::create([
@@ -45,11 +46,10 @@ class OrderController extends Controller
             'DT_PEDIDO' => carbon::now()
         ]);
 
-        OrderTag::create([
+         $orderTag = OrderTag::create([
             'COD_PEDIDO' => $order->COD_PEDIDO,
             'DS_PEDIDO_TAG' => $request->DS_PEDIDO_TAG
         ]);
-
         foreach ($request->file('files') as  $files) {
             Document::create([
                 'COD_TIPO_DOCUMENTO'    => 1,
@@ -62,20 +62,13 @@ class OrderController extends Controller
         }
 
         Notification::route('mail', config('mail.from.address'))
-            ->notify(new NewOrder($request));
+            ->notify(new NewOrder($order, $orderTag));
 
         toastr()->success('', 'Pedido Cadastrado');
 
         return redirect()->route('site.order.search');
     }
 
-//    public function search(Request $request)
-//    {
-//            $orders = Order::where('DS_PEDIDO', 'Like', '%' . request('term') . '%')->orderBy('COD_PEDIDO', 'DESC')->paginate(10);
-//
-//        return view('search', ['orders'=>$orders]);
-//
-//    }
     function search(){
          $orders = Order::where('DS_PEDIDO', 'Like', '%' . request('term') . '%')->orderBy('COD_PEDIDO', 'DESC')->paginate(10);
          return view('site.order.index',['orders'=>$orders]);
