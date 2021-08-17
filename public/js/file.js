@@ -1,7 +1,6 @@
 let arrayFiles = []
 let fileId = 0
 
-let posicaoAnexo = 0;
 
 // function showFiles(valor){
 //
@@ -150,11 +149,6 @@ function addFile(){
         for (let $i = 1; $i <= arrayFiles.length; $i++) {
             $("#addFile").append(arrayFiles[$i])
         }
-
-
-
-
-
 }
 
 

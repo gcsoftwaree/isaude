@@ -65,6 +65,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             if ($userStatus) {
+                $request->session()->put('COD_PESSOA', $peopleName->COD_PESSOA);
                 $request->session()->put('DS_LOGIN', $request->DS_LOGIN);
                 $request->session()->put('NOME_PESSOA', $peopleName->NOME_PESSOA);
                 toastr()->success('Login Realizado');
@@ -80,8 +81,9 @@ class LoginController extends Controller
 
     }
 
-    public function logout(request $request)
+    public function logout()
     {
+        session_unset();
         Auth::logout();
 
         return redirect()->intended('/');

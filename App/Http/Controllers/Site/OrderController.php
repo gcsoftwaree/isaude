@@ -69,8 +69,32 @@ class OrderController extends Controller
         return redirect()->route('site.order.search');
     }
 
-    function search(){
-         $orders = Order::where('DS_PEDIDO', 'Like', '%' . request('term') . '%')->orderBy('COD_PEDIDO', 'DESC')->paginate(10);
-         return view('site.order.index',['orders'=>$orders]);
+    public function search(){
+
+         $orders = Order::when(request('situacao'), function ($query, $situacao){
+
+             return $query->where('ST_PEDIDO', 'like', "%{$situacao}%");
+         })->when(request('pedido'), function ($query, $pedido){
+
+             return $query->where('COD_PEDIDO', 'like', "%{$pedido}%");
+             })->when(request('periodoDe') || request('periodoAte'),
+        function ($query) {
+
+             return $query->whereBetween('DT_PEDIDO', [request('periodoDe'), request('periodoAte') ?? carbon::now()]);
+         })->when(request('tag'), function ($query){
+
+             return $query->wherehas('tag', function ($query){
+             return $query->where('DS_PEDIDO_TAG', 'like', "%".request('tag')."%");
+             });
+         },
+         function ($query) {
+
+            return $query->where('COD_PESSOA', session('COD_PESSOA'))->orderBy('COD_PEDIDO', 'ASC');
+        })->paginate(10);
+
+
+         return view('site.order.index',compact('orders'));
     }
+
+
 }

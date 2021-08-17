@@ -46,6 +46,7 @@
                     <div style="width: 45%;  margin: auto;">
                         <button class="button button_primary" type="submit" >Cadastrar</button>
                         <button type="button" class="btn btn-primary" onclick="window.location='{{route('site.contact')}}'" >Voltar</button>
+
                     </div>
                 </form>
             </section>

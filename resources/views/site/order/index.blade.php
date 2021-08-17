@@ -10,9 +10,28 @@
                         <h4>Procurar Pedidos</h4><hr>
                         <form action="{{route('site.order.search')}}" method="GET">
 
-                            <div class="form-group">
-                                <label for="">Digite algo</label>
-                                <input type="text" class="form-control" name="term" placeholder="Pesquise aqui....." value="{{request()->input('term') }}">
+                            <div class="mb-3">
+                                <label for="pedido" class="form-label" >Número Pedido</label>
+                                    <input type="text" class="form-control" name="pedido"  value="{{request()->input('pedido') }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="periodo" class="form-label" >Periodo Solicitação</label>
+                                <input type="date" class="form-control" name="periodoDe"  value="{{request()->input('periodoDe') }}">
+                                <label for="periodo" class="form-label" >A</label>
+                                <input type="date" class="form-control" name="periodoAte"  value="{{request()->input('periodoAte') }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="situacao" class="form-label" >Situação Receita</label>
+                                <select class="form-select" name="situacao" aria-label="Default select example">
+                                    <option value="{{request()->input('situacao') }}" selected>::Selecione::</option>
+                                    <option value="A" >Ativo</option>
+                                    <option value="P">Pendente</option>
+                                    <option value="I">Inativo</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tag" class="form-label" >Tags</label>
+                                <input type="text" class="form-control" name="tag"  value="{{request()->input('tag') }}">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Pesquisar</button>
@@ -46,7 +65,7 @@
                                     @endforeach
                                 @else
 
-                                    <tr><td>Nenhum pedido foi encontrado!</td></tr>
+                                    <tr><td>Nenhum registro encontrado.</td></tr>
                                 @endif
                                 </tbody>
                             </table>

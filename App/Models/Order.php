@@ -17,4 +17,9 @@ class Order extends Model
         'DT_PEDIDO',
         'ST_PEDIDO'
     ];
+
+    public function tag()
+    {
+        return $this->hasOne(OrderTag::class, 'COD_PEDIDO', 'COD_PEDIDO');
+    }
 }
