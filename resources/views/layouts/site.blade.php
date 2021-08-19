@@ -33,7 +33,7 @@
 
     <!-- Links & Scripts -->
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
-    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>
+{{--    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>--}}
     <link rel="stylesheet" href="{{asset('css/provider.css')}}"/>
     <link rel="stylesheet" href="{{asset('site/bootstrap.css')}} ">
     @toastr_css
@@ -184,7 +184,7 @@
 
 <!-- Scripts -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+<script src="https://kit.fontawesome.com/12015aaedb.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
@@ -194,18 +194,24 @@
 <script src="{{asset('site/jquery.js')}}"></script>
 <script src="{{asset('site/bootstrap.js')}}"></script>
 
+
 @toastr_js
 @toastr_render
 
 <script>
-    // $(document).ready(function($){
-    //     $('.cpf_cnpj').inputmask({mask: ['000.000.000-00', '99.999.999/9999-99'], keepStatic: true });
-    // });
-    // $('.phone_with_ddd').inputmask({mask: ["(99) 9999-9999", "(61) 9 9999-9999"], keepStatic: true});
-    // $("#toggle").click(function () {
-    //     $(this).toggleClass("on")
-    //     $("#resize").toggleClass("active")
-    // })
+        // $(document).ready(function($){
+        //     $('.cpf_cnpj').inputmask({mask: ['000.000.000-00', '99.999.999/9999-99'], keepStatic: true });
+        // });
+        // $('.phone_with_ddd').inputmask({mask: ["(99) 9999-9999", "(61) 9 9999-9999"], keepStatic: true});
+        // $("#toggle").click(function () {
+        //     $(this).toggleClass("on")
+        //     $("#resize").toggleClass("active")
+        // })
+
+    $(document).on("click", ".user_dialog", function () {
+        let data_id = $(this).data('id');
+        $(".modal-body #data_id").val( data_id );
+    });
 </script>
 </html>
 

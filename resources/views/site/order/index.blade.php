@@ -23,10 +23,10 @@
                             <div class="mb-3">
                                 <label for="situacao" class="form-label" >Situação Receita</label>
                                 <select class="form-select" name="situacao" aria-label="Default select example">
-                                    <option value="{{request()->input('situacao') }}" selected>::Selecione::</option>
-                                    <option value="A" >Ativo</option>
-                                    <option value="P">Pendente</option>
-                                    <option value="I">Inativo</option>
+                                    <option value="">::Selecione::</option>
+                                    <option value="A" {{request()->input('situacao') == 'A' ? 'selected' : '' }}>Ativo</option>
+                                    <option value="P" {{request()->input('situacao') == 'P' ? 'selected' : '' }}>Pendente</option>
+                                    <option value="I" {{request()->input('situacao') == 'I' ? 'selected' : '' }}>Inativo</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -52,6 +52,8 @@
                                     <th>Descrição</th>
                                     <th>Data Cadastro</th>
                                     <th>Situação</th>
+                                    <th>Tag</th>
+                                    <th>Deletar</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -61,6 +63,8 @@
                                             <td>{{ $order->DS_PEDIDO  }}</td>
                                             <td>{{ $order->DT_PEDIDO  }}</td>
                                             <td>{{ $order->ST_PEDIDO  }}</td>
+                                            <td>{{ $order->DS_PEDIDO_TAG  }}</td>
+                                            <td><button type="button" data-id="{{ $order->COD_PEDIDO }}"  class=user_dialog data-bs-toggle="modal" data-bs-target="#orderModal"><i class="fa fa-trash-o"></i></button></td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -72,13 +76,37 @@
 
                             <div class="pagination">
                                     {{$orders->links('pagination::bootstrap-4')}}
-                                    {{$orders->appends(request()->input())->links('pagination::bootstrap-4')}}
                             </div>
                         @endif
+                        <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Deletar Pedido</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{route('site.order.update')}}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-body">
+                                            <p class="text-center">
+                                                Confirma a remoção do pedido?
+                                            </p>
+                                            <input type="hidden" name="id" id="data_id" value="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+                                            <button type="submit" class="btn btn-primary">Sim</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 </div>
+
 @endsection

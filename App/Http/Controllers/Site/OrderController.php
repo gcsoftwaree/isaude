@@ -13,6 +13,7 @@ use App\Notifications\NewOrder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -36,7 +37,6 @@ class OrderController extends Controller
     }
 
     public function register(OrderFormRequest $request){
-        ddd($request->all());
         $user = User::where('DS_LOGIN', $request->session()->get('DS_LOGIN'))->first();
 
         $order = Order::create([
@@ -77,8 +77,7 @@ class OrderController extends Controller
          })->when(request('pedido'), function ($query, $pedido){
 
              return $query->where('COD_PEDIDO', 'like', "%{$pedido}%");
-             })->when(request('periodoDe') || request('periodoAte'),
-        function ($query) {
+             })->when(request('periodoDe') || request('periodoAte'), function ($query) {
 
              return $query->whereBetween('DT_PEDIDO', [request('periodoDe'), request('periodoAte') ?? carbon::now()]);
          })->when(request('tag'), function ($query){
@@ -88,12 +87,20 @@ class OrderController extends Controller
              });
          },
          function ($query) {
-
-            return $query->where('COD_PESSOA', session('COD_PESSOA'))->orderBy('COD_PEDIDO', 'ASC');
+            return $query->where([
+                ['COD_PESSOA','=', session('COD_PESSOA')],
+                ['ST_PEDIDO', '!=' , 'I']
+            ])->orderBy('COD_PEDIDO', 'ASC');
         })->paginate(10);
 
+        return view('site.order.index',compact('orders'));
+    }
 
-         return view('site.order.index',compact('orders'));
+    public function softDelete(Request $request){
+
+        Order::where('COD_PEDIDO', $request->id)->update(['ST_PEDIDO' => 'I']);
+        toastr()->success('', 'Pedido deletado com sucesso.');
+        return Redirect::back();
     }
 
 
