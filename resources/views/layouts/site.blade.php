@@ -33,7 +33,7 @@
 
     <!-- Links & Scripts -->
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
-    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>
+{{--    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>--}}
     <link rel="stylesheet" href="{{asset('css/provider.css')}}"/>
     <link rel="stylesheet" href="{{asset('site/bootstrap.css')}} ">
     @toastr_css
@@ -58,49 +58,6 @@
 <body>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v11.0&appId=366643201503023&autoLogAppEvents=1" nonce="Iitg4YjG"></script>
-{{--<nav>--}}
-{{--    <div class="main-wrapper">--}}
-{{--        <div class="flex-container">--}}
-{{--            <a class="logotipo" href="{{route('site.home')}}">--}}
-{{--                <img src="{{asset('images/Asset 1.svg')}}">--}}
-{{--            </a>--}}
-{{--            <ul class="navigation__itens" id="menu">--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('site.home')}}">Página principal--}}
-{{--                        <span class="border-effect"></span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('site.products')}}">Produtos--}}
-{{--                        <span class="border-effect"></span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('site.blog')}}">Blog--}}
-{{--                        <span class="border-effect"></span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('site.about')}}">Sobre--}}
-{{--                        <span class="border-effect"></span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('site.contact')}}">Contato--}}
-{{--                        <span class="border-effect"></span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--            <!-- Hamburger menu -->--}}
-{{--            <div id="toggle">--}}
-{{--                <div class="span" id="one"></div>--}}
-{{--                <div class="span" id="two"></div>--}}
-{{--                <div class="span" id="three"></div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</nav>--}}
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light " id="menu">
     <div class="container">
         <a class="navbar-brand me-auto" href="{{route('site.home')}}">
@@ -132,53 +89,151 @@
         </div>
     </div>
 </nav>
-<!-- Hamburger menu list -->
-<div id="resize">
-    <ul id="menu">
-        <li><a  class="title-medium" href="{{route('site.home')}}">Página principal</a></li>
-        <li><a class="title-medium" href="{{route('site.products')}}">Produtos</a></li>
-        <li><a class="title-medium" href="{{route('site.blog')}}">Blog</a></li>
-        <li><a class="title-medium" href="{{route('site.about')}}">Sobre</a></li>
-        <li><a class="title-medium" href="{{route('site.contact')}}">Contato</a></li>
-    </ul>
-</div>
 
 @yield('content')
 
-<footer class="main_footer">
-    <div class="dots_pattern"></div>
-    <div class="main-wrapper flex-container">
-        <div class="quality-badge">
-            <p>Cur omnia mori? </p>
-            <p>Ubi est barbatus zelus? </p>
+<!-- Footer -->
+<footer class="footer text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+    <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+    >
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block">
+            <span>Fique conectado com a gente:</span>
         </div>
-        <ul>
-            <li class="footer__links">
-                <h4 class="title-small">Redes Sociais</h4>
-                <a href="{{route('site.blog')}}">Blog</a>
-            </li>
-            <li class="footer__links">
-                <h4 class="title-small">Empresa</h4>
-                <a href="{{route('site.about')}}">Informações Legais</a>
-                <a href="{{route('site.about')}}">Termo de Privacidade</a>
-                <a href="{{route('site.contact')}}">Entre em contato</a>
-            </li>
-            <li class="footer__links">
-                <h4 class="title-small">Contatos</h4>
-                <a title="Clique no número do telefone para ligar" href="tel:16999999999">Telefone</a>
-                <a title="Clique no email para enviar email automatico" href="mailto:contato@beerandcode.com
-                .br">Email</a>
-            </li>
-        </ul>
+        <!-- Left -->
+
+        <!-- Right -->
+        <div>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-google"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>Isaude
+                    </h6>
+                    <p>
+                        Here you can use rows and columns to organize your footer content. Lorem ipsum
+                        dolor sit amet, consectetur adipisicing elit.
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Empresa
+                    </h6>
+                    <p>
+                        <a href="{{route('site.about')}}" class="text-reset">Informações Legais</a>
+                    </p>
+                    <p>
+                        <a href="{{route('site.about')}}" class="text-reset">Termo de Privacidade</a>
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Contato
+                    </h6>
+                    <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        info@example.com
+                    </p>
+                    <p><a href="{{route('site.contact')}}" class="text-reset "><i class="fas fa-phone me-3">Fale com nosso suporte</i></a></p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2021 Copyright:
+        <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
     </div>
+    <!-- Copyright -->
 </footer>
-<section class="sub__footer">
-    <div class="main-wrapper flex-container">
-        <a href="#"><img src="{{asset('images/Lock-icon.svg')}}">CMS</a>
-        <p>Tem nada aqui não patrão, pode olhar pra outro canto.</p>
-        <a href="http://mmpx.com.br/" target="_blank">Deisgn by <strong>MMPX</strong></a>
-    </div>
-</section>
+<!-- Footer -->
+
+
+
+
+
+
+
+
+<!-- Footer -->
+
+{{--</footer>--}}
+<!-- Footer -->
+{{--<footer class="main_footer">--}}
+{{--    <div class="dots_pattern"></div>--}}
+{{--    <div class="main-wrapper flex-container">--}}
+{{--        <div class="quality-badge">--}}
+{{--            <p>Cur omnia mori? </p>--}}
+{{--            <p>Ubi est barbatus zelus? </p>--}}
+{{--        </div>--}}
+{{--        <ul>--}}
+{{--            <li class="footer__links">--}}
+{{--                <h4 class="title-small">Redes Sociais</h4>--}}
+{{--                <a href="{{route('site.blog')}}">Blog</a>--}}
+{{--            </li>--}}
+{{--            <li class="footer__links">--}}
+{{--                <h4 class="title-small">Empresa</h4>--}}
+{{--                <a href="{{route('site.about')}}">Informações Legais</a>--}}
+{{--                <a href="{{route('site.about')}}">Termo de Privacidade</a>--}}
+{{--                <a href="{{route('site.contact')}}">Entre em contato</a>--}}
+{{--            </li>--}}
+{{--            <li class="footer__links">--}}
+{{--                <h4 class="title-small">Contatos</h4>--}}
+{{--                <a title="Clique no número do telefone para ligar" href="tel:16999999999">Telefone</a>--}}
+{{--                <a title="Clique no email para enviar email automatico" href="mailto:contato@beerandcode.com--}}
+{{--                .br">Email</a>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
+{{--    </div>--}}
+{{--</footer>--}}
+{{--<section class="sub__footer">--}}
+{{--    <div class="main-wrapper flex-container">--}}
+{{--        <a href="#"><img src="{{asset('images/Lock-icon.svg')}}">CMS</a>--}}
+{{--        <p>Tem nada aqui não patrão, pode olhar pra outro canto.</p>--}}
+{{--        <a href="http://mmpx.com.br/" target="_blank">Deisgn by <strong>MMPX</strong></a>--}}
+{{--    </div>--}}
+{{--</section>--}}
 </body>
 
 
@@ -199,13 +254,6 @@
 @toastr_render
 
 <script type='text/javascript'>
-    // $(document).ready(function($){
-
-    // $('.phone_with_ddd').inputmask({mask: ["(99) 9999-9999", "(61) 9 9999-9999"], keepStatic: true});
-    // $("#toggle").click(function () {
-    //     $(this).toggleClass("on")
-    //     $("#resize").toggleClass("active")
-    // })
     $j=jQuery.noConflict();
     $j(document).ready(function() {
         $('.cpf_cnpj').inputmask({mask: ['999.999.999-99', '99.999.999/9999-99'], keepStatic: true });
