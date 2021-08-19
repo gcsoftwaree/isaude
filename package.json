@@ -22,6 +22,7 @@
         "@popperjs/core": "^2.9.3",
         "bootstrap": "^5.0.2",
         "inputmask": "^5.0.6",
-        "jquery": "^3.6.0"
+        "jquery": "^3.6.0",
+        "jquery-mask-plugin": "^1.14.16"
     }
 }
