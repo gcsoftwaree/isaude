@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -37,6 +36,7 @@ class OrderController extends Controller
     }
 
     public function register(OrderFormRequest $request){
+
         $user = User::where('DS_LOGIN', $request->session()->get('DS_LOGIN'))->first();
 
         $order = Order::create([
@@ -45,11 +45,14 @@ class OrderController extends Controller
             'ST_PEDIDO' => 'A',
             'DT_PEDIDO' => carbon::now()
         ]);
+        $arraytags = explode(',',$request->DS_PEDIDO_TAG);
+        foreach($arraytags as $tag){
+            $orderTag = OrderTag::create([
+                'COD_PEDIDO' => $order->COD_PEDIDO,
+                'DS_PEDIDO_TAG' => $tag
+            ]);
+        }
 
-         $orderTag = OrderTag::create([
-            'COD_PEDIDO' => $order->COD_PEDIDO,
-            'DS_PEDIDO_TAG' => $request->DS_PEDIDO_TAG
-        ]);
         foreach ($request->file('files') as  $files) {
             Document::create([
                 'COD_TIPO_DOCUMENTO'    => 1,
@@ -70,7 +73,6 @@ class OrderController extends Controller
     }
 
     public function search(){
-
          $orders = Order::when(request('situacao'), function ($query, $situacao){
 
              return $query->where('ST_PEDIDO', 'like', "%{$situacao}%");
@@ -83,8 +85,11 @@ class OrderController extends Controller
          })->when(request('tag'), function ($query){
 
              return $query->wherehas('tag', function ($query){
-             return $query->where('DS_PEDIDO_TAG', 'like', "%".request('tag')."%");
-             });
+             return $query->where('DS_PEDIDO_TAG', 'like', "%".request('tag')."%")->where([
+                 ['COD_PESSOA','=', session('COD_PESSOA')],
+                 ['ST_PEDIDO', '!=' , 'I']
+             ])->orderBy('COD_PEDIDO', 'ASC');
+             })->paginate(10);
          },
          function ($query) {
             return $query->where([

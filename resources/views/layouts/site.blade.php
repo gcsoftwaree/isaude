@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
-
+<script type="text/javascript" src="{{asset('js/tagin.min.js')}}"></script>
 <head>
     <title>Isaude</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
@@ -33,7 +33,7 @@
 
     <!-- Links & Scripts -->
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
-{{--    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>--}}
+    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/provider.css')}}"/>
     <link rel="stylesheet" href="{{asset('site/bootstrap.css')}} ">
     @toastr_css
@@ -52,6 +52,7 @@
     <link rel="apple-touch-icon" sizes="512x512" href="{{asset('images/Frame.svg')}}">
 
     <!-- Lightbox -->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/tagin.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('lightbox/css/lightbox.css')}}"/>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
 </head>
@@ -248,6 +249,7 @@
 <script type="text/javascript" src="{{asset('lightbox/js/lightbox.js')}}"></script>
 <script src="{{asset('site/jquery.js')}}"></script>
 <script src="{{asset('site/bootstrap.js')}}"></script>
+
 
 
 @toastr_js

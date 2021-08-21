@@ -53,7 +53,8 @@ class NewOrder extends Notification
                     ->line('<strong>Dados do pedido<strong>')
                     ->line("<strong>Número:</strong> {$this->order->COD_PEDIDO}")
                     ->line("<strong>Data:</strong> {$this->order->DT_PEDIDO}")
-                    ->line("<strong>Descrição:</strong> {$this->orderTag->DS_PEDIDO_TAG}")
+                    ->line("<strong>Descrição:</strong> {$this->order->DS_PEDIDO}")
+                    ->line("<strong>Tags:</strong> {$this->orderTag->DS_PEDIDO_TAG}")
                     ->line('Faça o seu acesso e registre uma cotação.')
                     ->salutation('Desde já agradecemos.');
     }

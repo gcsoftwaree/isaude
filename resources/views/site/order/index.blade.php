@@ -1,6 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
+
 <div>
     <div class="mx-auto pull-right">
         <section class="contact__block contact-wrapper">
@@ -26,12 +27,11 @@
                                     <option value="">::Selecione::</option>
                                     <option value="A" {{request()->input('situacao') == 'A' ? 'selected' : '' }}>Ativo</option>
                                     <option value="P" {{request()->input('situacao') == 'P' ? 'selected' : '' }}>Pendente</option>
-                                    <option value="I" {{request()->input('situacao') == 'I' ? 'selected' : '' }}>Inativo</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="tag" class="form-label" >Tags</label>
-                                <input type="text" class="form-control" name="tag"  value="{{request()->input('tag') }}">
+                                <input type="text" class="form-control tagin" name="tag"  value="{{request()->input('tag') }}">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Pesquisar</button>
@@ -43,7 +43,6 @@
                         <hr>
                         <br>
                         @if(isset($orders))
-
                             <table class="table table-hover">
                                 @if(count($orders) > 0)
                                 <thead>
@@ -63,7 +62,7 @@
                                             <td>{{ $order->DS_PEDIDO  }}</td>
                                             <td>{{ $order->DT_PEDIDO  }}</td>
                                             <td>{{ $order->ST_PEDIDO  }}</td>
-                                            <td>{{ $order->DS_PEDIDO_TAG  }}</td>
+                                            <td>{{ $order->tag->DS_PEDIDO_TAG  }}</td>
                                             <td><button type="button" data-id="{{ $order->COD_PEDIDO }}"  class=user_dialog data-bs-toggle="modal" data-bs-target="#orderModal"><i class="fa fa-trash-o"></i></button></td>
                                         </tr>
                                     @endforeach
@@ -108,5 +107,7 @@
         </section>
     </div>
 </div>
-
+<script>
+    tagin( document.querySelector('.tagin') );
+</script>
 @endsection
