@@ -45,6 +45,7 @@ class OrderController extends Controller
             'ST_PEDIDO' => 'A',
             'DT_PEDIDO' => carbon::now()
         ]);
+
         $arraytags = explode(',',$request->DS_PEDIDO_TAG);
         foreach($arraytags as $tag){
             $orderTag = OrderTag::create([
@@ -73,6 +74,7 @@ class OrderController extends Controller
     }
 
     public function search(){
+
          $orders = Order::when(request('situacao'), function ($query, $situacao){
 
              return $query->where('ST_PEDIDO', 'like', "%{$situacao}%");
@@ -87,10 +89,11 @@ class OrderController extends Controller
              return $query->wherehas('tag', function ($query){
              return $query->where('DS_PEDIDO_TAG', 'like', "%".request('tag')."%")->where([
                  ['COD_PESSOA','=', session('COD_PESSOA')],
-                 ['ST_PEDIDO', '!=' , 'I']
-             ])->orderBy('COD_PEDIDO', 'ASC');
-             })->paginate(10);
+                 ['ST_PEDIDO', '!=' , 'I']]);
+             });
+
          },
+
          function ($query) {
             return $query->where([
                 ['COD_PESSOA','=', session('COD_PESSOA')],
