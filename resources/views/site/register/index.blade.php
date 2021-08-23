@@ -13,8 +13,6 @@
                             {{session('message')}}
                         </div>
                     @endif
-                    <div>
-                    </div>
                     <label for="NOME_PESSOA">Nome</label>
                     <input id="NOME_PESSOA" name="NOME_PESSOA" type="text"  tabindex="1" placeholder="Ex: Voldemort Camundongo da Silva"
                            autofocus value="{{old('NOME_PESSOA')}}" >
@@ -65,5 +63,6 @@
                 </form>
             </section>
         </section>
-        </div>
+    </div>
+    <script src="{{asset('js/masks.js')}}"></script>
 @endsection

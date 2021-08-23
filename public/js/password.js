@@ -1,4 +1,5 @@
 function password_show_hide() {
+    alert('oi')
     var x = document.getElementById("DS_SENHA");
     var show_eye = document.getElementById("show_eye");
     var hide_eye = document.getElementById("hide_eye");
