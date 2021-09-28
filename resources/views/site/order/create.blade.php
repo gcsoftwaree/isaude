@@ -17,13 +17,13 @@
                     @endif
                     <label for="DS_PEDIDO_TAG">Titulo</label>
                     <input id="DS_PEDIDO_TAG" name="DS_PEDIDO_TAG" type="text" class="tagin" tabindex="1"
-                           autofocus value="{{old('DS_PEDIDO_TAG')}}" >
+                           autofocus value="{{isset($order->tag->DS_PEDIDO_TAG) ? $order->tag->DS_PEDIDO_TAG : old('DS_PEDIDO_TAG')}}">
                     @error('DS_PEDIDO_TAG')
                     <div class="required__text">{{ $message }}</div>
                     @enderror
                     <label for="DS_PEDIDO">Descrição</label>
                     <input id="DS_PEDIDO" name="DS_PEDIDO" type="text"  tabindex="2"
-                            value="{{old('DS_PEDIDO')}}" >
+                           value="{{isset($order->DS_PEDIDO) ? $order->DS_PEDIDO : old('DS_PEDIDO')}}">
                     @error('DS_PEDIDO')
                     <div class="required__text">{{ $message }}</div>
                     @enderror
@@ -45,6 +45,7 @@
                     <div class="required__text">{{ $message }}</div>
                     @enderror
                     <div style="width: 45%;  margin: auto;">
+                        <input type="hidden" name="COD_PEDIDO" value="{{$order->COD_PEDIDO}}">
                         <button class="button button_primary" type="submit" >Cadastrar</button>
                         <button type="button" class="btn btn-primary" onclick="window.location='{{route('site.order')}}'" >Voltar</button>
                     </div>

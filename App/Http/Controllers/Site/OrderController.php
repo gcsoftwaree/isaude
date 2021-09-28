@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderFormRequest;
 use App\Models\Document;
+use App\Notifications\UpdateOrder;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderTag;
@@ -36,39 +37,56 @@ class OrderController extends Controller
     }
 
     public function register(OrderFormRequest $request){
+        if(isset($request->COD_PEDIDO)){
 
-        $user = User::where('DS_LOGIN', $request->session()->get('DS_LOGIN'))->first();
-
-        $order = Order::create([
-            'COD_PESSOA' => $user->COD_PESSOA,
-            'DS_PEDIDO' => $request->DS_PEDIDO,
-            'ST_PEDIDO' => 'A',
-            'DT_PEDIDO' => carbon::now()
-        ]);
-
-        $arraytags = explode(',',$request->DS_PEDIDO_TAG);
-        foreach($arraytags as $tag){
-            $orderTag = OrderTag::create([
-                'COD_PEDIDO' => $order->COD_PEDIDO,
-                'DS_PEDIDO_TAG' => $tag
+            Order::where('COD_PEDIDO', $request->COD_PEDIDO)->update([
+                'DS_PEDIDO' => $request->DS_PEDIDO,
             ]);
-        }
 
-        foreach ($request->file('files') as  $files) {
-            Document::create([
-                'COD_TIPO_DOCUMENTO'    => 1,
-                'NOME_DOCUMENTO'        => $files->getClientOriginalName(),
-                'DS_CAMINHO_DOCUMENTO'  => $files->store('orders'),
-                'DT_CADASTRO'           => Carbon::now(),
-                'NOME_EXTENSAO'         => $files->getClientOriginalExtension(),
-                'DS_MIME_TYPE'          => $files->getClientMimeType()
+            OrderTag::where('COD_PEDIDO', $request->COD_PEDIDO)->update([
+                'DS_PEDIDO_TAG' => $request->DS_PEDIDO_TAG,
             ]);
+
+            Notification::route('mail', config('mail.from.address'))
+                ->notify(new UpdateOrder($request));
+
+            toastr()->success('', 'Pedido Atualizado');
+
+        }else{
+
+            $user = User::where('DS_LOGIN', $request->session()->get('DS_LOGIN'))->first();
+
+            $order = Order::create([
+                'COD_PESSOA' => $user->COD_PESSOA,
+                'DS_PEDIDO' => $request->DS_PEDIDO,
+                'ST_PEDIDO' => 'A',
+                'DT_PEDIDO' => carbon::now()
+            ]);
+
+            $arraytags = explode(',', $request->DS_PEDIDO_TAG);
+            foreach ($arraytags as $tag) {
+                $orderTag = OrderTag::create([
+                    'COD_PEDIDO' => $order->COD_PEDIDO,
+                    'DS_PEDIDO_TAG' => $tag
+                ]);
+            }
+
+            foreach ($request->file('files') as $files) {
+                Document::create([
+                    'COD_TIPO_DOCUMENTO' => 1,
+                    'NOME_DOCUMENTO' => $files->getClientOriginalName(),
+                    'DS_CAMINHO_DOCUMENTO' => $files->store('orders'),
+                    'DT_CADASTRO' => Carbon::now(),
+                    'NOME_EXTENSAO' => $files->getClientOriginalExtension(),
+                    'DS_MIME_TYPE' => $files->getClientMimeType()
+                ]);
+            }
+
+            Notification::route('mail', config('mail.from.address'))
+                ->notify(new NewOrder($order, $orderTag));
+
+            toastr()->success('', 'Pedido Cadastrado');
         }
-
-        Notification::route('mail', config('mail.from.address'))
-            ->notify(new NewOrder($order, $orderTag));
-
-        toastr()->success('', 'Pedido Cadastrado');
 
         return redirect()->route('site.order.search');
     }
@@ -110,6 +128,7 @@ class OrderController extends Controller
         toastr()->success('', 'Pedido deletado com sucesso.');
         return Redirect::back();
     }
-
-
+    public function edit(Order $order){
+        return view('site.order.create', compact('order'));
+    }
 }

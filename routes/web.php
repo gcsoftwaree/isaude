@@ -46,6 +46,7 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
 
     Route::get('pedido/cadastro', 'OrderController@create')->name('site.order.create');
     Route::post('pedido/cadastro', 'OrderController@register')->name('site.order.register');
+    Route::get('pedido/editar/{order}', 'OrderController@edit')->name('site.order.edit');
     Route::put('pedido/delete', 'OrderController@softDelete')->name('site.order.update');
 
     Route::get('pedido/busca', 'OrderController@index')->name('site.order');
