@@ -15,16 +15,21 @@ class People extends Model
     protected $fillable = [
    'TP_PESSOA',
    'COD_TIPO_GENERO',
-   'cod_estado_civil',
-   'cod_nivel_escolaridade',
+   'COD_ESTADO_CIVIL',
+   'COD_NIVEL_ESCOLARIDADE',
    'CPF_CNPJ',
    'NOME_PESSOA',
-   'nome_razao_social',
-   'nome_fantasia',
-   'nome_mae',
-   'nome_pai',
+   'NOME_RAZAO_SOCIAL',
+   'NOME_FANTASIA',
+   'NOME_MAE',
+   'NOME_PAI',
    'DT_NASCIMENTO',
    'DT_CADASTRO'
     ];
+
+    public function mail()
+    {
+        return $this->hasOne(UserMail::class, 'COD_PESSOA', 'COD_PESSOA');
+    }
 
 }

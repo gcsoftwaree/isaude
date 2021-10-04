@@ -34,7 +34,7 @@
 
     <!-- Links & Scripts -->
     <link rel="stylesheet" href="https://use.typekit.net/nbc5nyh.css">
-{{--    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>--}}
+    <link rel="stylesheet" href="{{asset('css/App.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/provider.css')}}"/>
     <link rel="stylesheet" href="{{asset('site/bootstrap.css')}} ">
     @toastr_css

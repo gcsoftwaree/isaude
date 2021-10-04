@@ -53,6 +53,7 @@
                                     <th>Situação</th>
                                     <th>Tag</th>
                                     <th>Editar</th>
+                                    <th>Visualizar</th>
                                     <th>Deletar</th>
                                 </tr>
                                 </thead>
@@ -65,6 +66,7 @@
                                             <td>{{ $order->ST_PEDIDO  }}</td>
                                             <td>{{ $order->tag->DS_PEDIDO_TAG  }}</td>
                                             <td><a href="{{route('site.order.edit',$order->COD_PEDIDO)}}"><i class="fa fa-pencil-square-o "></i></a></td>
+                                            <td><a href="{{route('site.order.show',$order->COD_PEDIDO)}}"><i class="fa fa-eye "></i></a></td>
                                             <td><button type="button" data-id="{{ $order->COD_PEDIDO }}"  class=user_dialog data-bs-toggle="modal" data-bs-target="#orderModal"><i class="fa fa-trash-o"></i></button></td>
                                         </tr>
                                     @endforeach

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterFormRequest;
+use App\Http\Requests\PeopleFormRequest;
+use App\Http\Requests\physicalFormRequest;
 use App\Models\People;
 use App\Models\User;
 use App\Models\UserPhone;
@@ -14,9 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use App\Models\UserMail;
-use mysql_xdevapi\Exception;
 
-class RegisterController extends Controller
+class PeopleController extends Controller
 {
     protected UserMail $user_mail;
     public function __construct(){
@@ -29,13 +29,13 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view ('site.register.index');
+        return view ('site.people.index');
     }
 
-    public function form(RegisterFormRequest $request){
+    public function form(PeopleFormRequest $request){
         $people = People::create([
             'NOME_PESSOA' => $request->NOME_PESSOA,
-            'CPF_CNPJ' => $request->CPF_CNPJ,
+            'CPF_CNPJ' => $request ->CPF_CNPJ,
             'TP_PESSOA' => '1',
             'DT_NASCIMENTO' => $request->DT_NASCIMENTO,
             'DT_CADASTRO' => Carbon::now()
@@ -70,10 +70,71 @@ class RegisterController extends Controller
 
         Auth::loginUsingId($user->COD_USUARIO);
 
-            return redirect()->route('site.home');
+        return redirect()->route('site.home');
     }
 
+    public function physicalPerson(People $people){
 
+        return view('site.people.physicalPeople', compact('people'));
+    }
+
+    public function legalPerson(People $people){
+
+        return view('site.people.legalPeople', compact('people'));
+    }
+
+    public function physicalPersonForm(physicalFormRequest $request){
+        try {
+            People::where('COD_PESSOA', $request->COD_PESSOA)->update([
+                'DT_NASCIMENTO'=> $request->DT_NASCIMENTO,
+                'NOME_MAE'=> $request->NOME_MAE,
+                'NOME_PAI'=> $request->NOME_PAI,
+                'COD_TIPO_GENERO'=> $request->COD_TIPO_GENERO,
+                'COD_ESTADO_CIVIL'=> $request->COD_ESTADO_CIVIL,
+                'COD_NIVEL_ESCOLARIDADE'=> $request->COD_NIVEL_ESCOLARIDADE
+            ]);
+
+            if(isset($request->DS_EMAIL)) {
+                UserMail::where('COD_PESSOA', $request->COD_PESSOA)->update([
+                    'DS_EMAIL' => $request->DS_EMAIL
+                ]);
+            }
+
+            UserPhone::where('COD_PESSOA', $request->COD_PESSOA)->update([
+                'NUM_TELEFONE'=> $request->NUM_TELEFONE
+            ]);
+        }catch (\Exception $e){
+            die($e);
+        }
+
+        toastr()->success('Seus dados foram complementados com sucesso.', 'Cadastro Atualizado');
+        return redirect()->route('site.home');
+    }
+
+    public function legalPersonForm(Request $request){
+            People::where('COD_PESSOA', $request->COD_PESSOA)->update([
+                'NOME_RAZAO_SOCIAL'=> $request->NOME_RAZAO_SOCIAL,
+                'DT_NASCIMENTO'=> $request->DT_NASCIMENTO,
+                'NOME_FANTASIA'=> $request->NOME_FANTASIA,
+                'COD_NIVEL_ESCOLARIDADE'=> $request->COD_NIVEL_ESCOLARIDADE,
+            ]);
+            if(isset($request->DS_EMAIL)) {
+                UserMail::where('COD_PESSOA', $request->COD_PESSOA)->update([
+                    'DS_EMAIL' => $request->DS_EMAIL
+                ]);
+            }
+
+            UserPhone::where('COD_PESSOA', $request->COD_PESSOA)->update([
+                'NUM_TELEFONE'=> $request->NUM_TELEFONE
+            ]);
+
+        toastr()->success('Seus dados foram complementados com sucesso.', 'Cadastro Atualizado');
+        return redirect()->route('site.home');
+    }
+
+    public function botao (){
+        return view ('site.people.botao');
+    }
 //    /**
 //         * Store a newly created resource in storage.
 //         *
