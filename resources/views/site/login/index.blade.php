@@ -57,7 +57,7 @@
                                 </form>
                             </div>
                             <div>
-                                <p class="mb-0"><h6>Não tem uma conta?<a href="{{route('site.register.form')}}" class="text-white-50 fw-bold"> Cadastre-se</a></h6>
+                                <p class="mb-0"><h6>Não tem uma conta?<a href="{{route('site.people.form')}}" class="text-white-50 fw-bold"> Cadastre-se</a></h6>
                             </div>
                         </div>
                     </div>

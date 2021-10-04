@@ -6,7 +6,7 @@
             <h1 class="display-medium">Um sistema de controle e integração de saúde </h1>
             <p>Fácil acesso e ambiente controlado.</p>
             <section class="contact__options">
-                <form class="contact__form" action="{{route('site.register.form')}}" method="post">
+                <form class="contact__form" action="{{route('site.people.form')}}" method="post">
                     @csrf
                     @if(session('success'))
                         <div>
