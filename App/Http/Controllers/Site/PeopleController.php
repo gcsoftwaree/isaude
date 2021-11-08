@@ -131,10 +131,6 @@ class PeopleController extends Controller
         toastr()->success('Seus dados foram complementados com sucesso.', 'Cadastro Atualizado');
         return redirect()->route('site.home');
     }
-
-    public function botao (){
-        return view ('site.people.botao');
-    }
 //    /**
 //         * Store a newly created resource in storage.
 //         *
