@@ -45,7 +45,7 @@
                     <div class="required__text">{{ $message }}</div>
                     @enderror
                     <div style="width: 45%;  margin: auto;">
-                        <input type="hidden" name="COD_PEDIDO" value="{{$order->COD_PEDIDO}}">
+                        <input type="hidden" name="COD_PEDIDO" value="{{$order->COD_PEDIDO ?? ''}}">
                         <button class="button button_primary" type="submit" >Cadastrar</button>
                         <button type="button" class="btn btn-primary" onclick="window.location='{{route('site.order')}}'" >Voltar</button>
                     </div>

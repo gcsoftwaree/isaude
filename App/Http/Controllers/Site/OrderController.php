@@ -37,6 +37,7 @@ class OrderController extends Controller
     }
 
     public function register(OrderFormRequest $request){
+
         if(isset($request->COD_PEDIDO)){
 
             Order::where('COD_PEDIDO', $request->COD_PEDIDO)->update([
@@ -130,5 +131,9 @@ class OrderController extends Controller
     }
     public function edit(Order $order){
         return view('site.order.create', compact('order'));
+    }
+
+    public function show(Order $order){
+        return view('site.order.show', compact('order'));
     }
 }
