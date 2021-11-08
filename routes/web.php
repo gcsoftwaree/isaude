@@ -40,7 +40,6 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
     Route::post('cadastro/dados-fisicos', 'PeopleController@physicalPersonForm')->name('site.physicalPeople.form');
     Route::get('cadastro/dados-juridicos/{people}', 'PeopleController@legalPerson')->name('site.legalPeople');
     Route::post('cadastro/dados-juridicos', 'PeopleController@legalPersonForm')->name('site.legalPeople.form');
-    Route::get('botao', 'PeopleController@botao')->name('site.people.botao');
 
 
 
