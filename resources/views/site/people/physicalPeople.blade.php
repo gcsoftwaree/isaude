@@ -87,18 +87,9 @@
                     <label for="COD_NIVEL_ESCOLARIDADE" class="form-label" >Escolaridade</label>
                     <select class="form-select" name="COD_NIVEL_ESCOLARIDADE" tabindex="10" aria-label="Default select example">
                         <option value="" >::Selecione::</option>
-                        <option value="1" >Fundamental - Incompleto</option>
-                        <option value="2" >Fundamental - Completo</option>
-                        <option value="3" >Médio - Incompleto</option>
-                        <option value="4" >Médio - Completo</option>
-                        <option value="5" >Superior - Incompleto</option>
-                        <option value="6" >Superior - Completo</option>
-                        <option value="7" >Pós-graduação - Incompleto</option>
-                        <option value="8" >Pós-graduação - Completo</option>
-                        <option value="9" >Mestrado - Incompleto</option>
-                        <option value="10" >Mestrado - Completo</option>
-                        <option value="11" >Doutorado - Incompleto</option>
-                        <option value="12" >Doutorado - Completo</option>
+                        @foreach($escolaridades as $escolaridade)
+                            <option value="{{$escolaridade->COD_NIVEL_ESCOLARIDADE}}" >{{$escolaridade->NOME_NIVEL_ESCOLARIDADE}}</option>
+                        @endforeach
                     </select>
                     @error('COD_NIVEL_ESCOLARIDADE')
                         <br>

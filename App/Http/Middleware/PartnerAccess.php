@@ -6,8 +6,7 @@ use App\Models\Profile;
 use Closure;
 use Illuminate\Http\Request;
 
-
-class AdminAccess
+class PartnerAccess
 {
     /**
      * Handle an incoming request.
@@ -19,15 +18,14 @@ class AdminAccess
     public function handle(Request $request, Closure $next)
     {
         if(auth()->check()){
-            if(auth()->user()->profile->pluck('COD_PERFIL')->contains(Profile::ADMIN)) {
+            if(auth()->user()->profile->pluck('COD_PERFIL')->contains(Profile::PARTNER)) {
                 return $next($request);
             }
-            return response()->view('site.home.index');
+            dd('NÃO SOU PARCEIRO');
         }else{
-           auth()->logout();
-           return response()->view('site.login.index');
+            auth()->logout();
+            return response()->view('site.login.index');
 
         }
-
     }
 }

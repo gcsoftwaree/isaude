@@ -31,5 +31,8 @@ class People extends Model
     {
         return $this->hasOne(UserMail::class, 'COD_PESSOA', 'COD_PESSOA');
     }
-
+//    public function setCpfCnpjAttribute($value)
+//    {
+//        return ucfirst($value);
+//    }
 }

@@ -6,8 +6,7 @@ use App\Models\Profile;
 use Closure;
 use Illuminate\Http\Request;
 
-
-class AdminAccess
+class UserAccess
 {
     /**
      * Handle an incoming request.
@@ -19,15 +18,13 @@ class AdminAccess
     public function handle(Request $request, Closure $next)
     {
         if(auth()->check()){
-            if(auth()->user()->profile->pluck('COD_PERFIL')->contains(Profile::ADMIN)) {
+            if(auth()->user()->profile->pluck('COD_PERFIL')->contains(Profile::USER)) {
                 return $next($request);
             }
-            return response()->view('site.home.index');
-        }else{
-           auth()->logout();
-           return response()->view('site.login.index');
-
+            dd('NOT USER');
+        }else {
+            auth()->logout();
+            return response()->view('site.login.index');
         }
-
     }
 }
