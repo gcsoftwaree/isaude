@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PeopleFormRequest;
 use App\Http\Requests\physicalFormRequest;
+use App\Models\NivelEscolaridade;
 use App\Models\People;
 use App\Models\User;
 use App\Models\UserPhone;
+use App\Models\UserProfile;
 use App\Notifications\NewUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -51,6 +53,12 @@ class PeopleController extends Controller
 
         ]);
 
+        UserProfile::create([
+            'COD_PERFIL' => 2,
+            'COD_USUARIO' => $user->COD_USUARIO,
+            'ST_USUARIO_PERFIL' => 'A'
+        ]);
+
         UserMail::create([
             'COD_PESSOA' => $people->COD_PESSOA,
             'ST_EMAIL_PRINCIPAL'=> '1',
@@ -64,6 +72,7 @@ class PeopleController extends Controller
             'NUM_TELEFONE' => $request->NUM_TELEFONE
         ]);
 
+
         Notification::route('mail', config('mail.from.address'))
             ->notify(new NewUser($request));
              toastr()->success('Uma confirmação foi enviada ao seu email.', 'Cadastro Realizado');
@@ -74,12 +83,11 @@ class PeopleController extends Controller
     }
 
     public function physicalPerson(People $people){
-
-        return view('site.people.physicalPeople', compact('people'));
+        $escolaridades = NivelEscolaridade::all();
+        return view('site.people.physicalPeople', compact('people','escolaridades'));
     }
 
     public function legalPerson(People $people){
-
         return view('site.people.legalPeople', compact('people'));
     }
 

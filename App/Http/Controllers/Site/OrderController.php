@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderFormRequest;
 use App\Models\Document;
+use App\Models\People;
 use App\Notifications\UpdateOrder;
 use Illuminate\Http\Request;
 use App\Models\Order;
