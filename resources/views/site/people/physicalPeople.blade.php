@@ -64,9 +64,10 @@
                     <label for="COD_TIPO_GENERO" class="form-label" >Gênero</label>
                     <select class="form-select" name="COD_TIPO_GENERO" tabindex="8" aria-label="Default select example">
                         <option value="" >::Selecione::</option>
-                        <option value="1" >Feminino</option>
-                        <option value="2" >Masculino</option>
-                        <option value="3" >Outro</option>
+                        @foreach($genders as $gender)
+                            <option value="{{$gender->COD_TIPO_GENERO}}">{{$gender->NOME_TIPO_GENERO}}</option>
+                        @endforeach
+
                     </select>
                     @error('COD_TIPO_GENERO')
                     <br>
@@ -75,10 +76,10 @@
                     <label for="COD_ESTADO_CIVIL" class="form-label" >Estado Cívil</label>
                     <select class="form-select" name="COD_ESTADO_CIVIL" tabindex="9" aria-label="Default select example">
                         <option value="" >::Selecione::</option>
-                        <option value="1" >Solteiro(a)</option>
-                        <option value="2" >Casado(a)</option>
-                        <option value="3" >Divorciado(a)</option>
-                        <option value="4" >Viúvo(a)</option>
+                        @foreach($maritalStatus as $stauts)
+                            <option value="{{$stauts->COD_ESTADO_CIVIL}}">{{$stauts->NOME_ESTADO_CIVIL}}</option>
+                        @endforeach
+
                     </select>
                     @error('COD_ESTADO_CIVIL')
                     <br>
@@ -87,8 +88,8 @@
                     <label for="COD_NIVEL_ESCOLARIDADE" class="form-label" >Escolaridade</label>
                     <select class="form-select" name="COD_NIVEL_ESCOLARIDADE" tabindex="10" aria-label="Default select example">
                         <option value="" >::Selecione::</option>
-                        @foreach($escolaridades as $escolaridade)
-                            <option value="{{$escolaridade->COD_NIVEL_ESCOLARIDADE}}" >{{$escolaridade->NOME_NIVEL_ESCOLARIDADE}}</option>
+                        @foreach($educations as $education)
+                            <option value="{{$education->COD_NIVEL_ESCOLARIDADE}}" >{{$education->NOME_NIVEL_ESCOLARIDADE}}</option>
                         @endforeach
                     </select>
                     @error('COD_NIVEL_ESCOLARIDADE')

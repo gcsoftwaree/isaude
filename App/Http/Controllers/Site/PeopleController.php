@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PeopleFormRequest;
 use App\Http\Requests\physicalFormRequest;
-use App\Models\NivelEscolaridade;
+use App\Models\Education;
+use App\Models\Gender;
+use App\Models\MaritalStatus;
 use App\Models\People;
 use App\Models\User;
 use App\Models\UserPhone;
@@ -83,8 +85,10 @@ class PeopleController extends Controller
     }
 
     public function physicalPerson(People $people){
-        $escolaridades = NivelEscolaridade::all();
-        return view('site.people.physicalPeople', compact('people','escolaridades'));
+        $educations = Education::all();
+        $maritalStatus = MaritalStatus::all();
+        $genders = Gender::all();
+        return view('site.people.physicalPeople', compact('people','educations','maritalStatus','genders'));
     }
 
     public function legalPerson(People $people){
