@@ -28,8 +28,8 @@ Route::namespace('\App\Http\Controllers\Site')->group(function(){
         Route::get('/logout', 'LoginController@logout')->name('site.login.logout');
         Route::post('/forgot', 'ForgotPasswordController@forgetPasswordForm')->name('site.forgot.form');
 
-        Route::get('login/{provider}', 'LoginController@redirectToProvider')->name('social.login');
-        Route::get('login/{provider}/callback', 'LoginController@handleProviderCallback')->name('social.callback');
+        Route::get('/{provider}', 'LoginController@redirectToProvider')->name('social.login');
+        Route::get('/{provider}/callback', 'LoginController@handleProviderCallback')->name('social.callback');
 
     });
 
